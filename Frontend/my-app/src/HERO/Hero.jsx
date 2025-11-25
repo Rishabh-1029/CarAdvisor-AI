@@ -31,34 +31,34 @@ function Hero() {
       </section>
 
       {/* Icon section */}
-      <section class="icons-container">
-        <div class="icons">
-          <i class="fa-solid fa-house"></i>
-          <div class="content">
+      <section className="icons-container">
+        <div className="icons">
+          <i className="fa-solid fa-house"></i>
+          <div className="content">
             <h3>04+</h3>
             <p>branches</p>
           </div>
         </div>
 
-        <div class="icons">
-          <i class="fa-solid fa-car"></i>
-          <div class="content">
+        <div className="icons">
+          <i className="fa-solid fa-car"></i>
+          <div className="content">
             <h3>50+</h3>
             <p>Cars Available</p>
           </div>
         </div>
 
-        <div class="icons">
-          <i class="fa-solid fa-users"></i>
-          <div class="content">
+        <div className="icons">
+          <i className="fa-solid fa-users"></i>
+          <div className="content">
             <h3>50+</h3>
             <p>happy Reviews</p>
           </div>
         </div>
 
-        <div class="icons">
-          <i class="fa-solid fa-car"></i>
-          <div class="content">
+        <div className="icons">
+          <i className="fa-solid fa-car"></i>
+          <div className="content">
             <h3>20+</h3>
             <p>upcoming cars</p>
           </div>

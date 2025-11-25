@@ -5,7 +5,6 @@
   align-items: center;
   padding: 8rem 8%;
   gap: 5rem;
-  border: 1px black solid;
   margin-top: 5rem;
 }
 
@@ -53,6 +52,7 @@
 /* RIGHT VISUAL */
 .hero-right {
   position: relative;
+  transition: 0.3s ease;
 }
 
 .hero-bg {
@@ -65,12 +65,83 @@
   top: -40px;
   right: -40px;
   z-index: 1;
+  transition: 0.3s ease;
 }
 
 .hero-car {
   width: 500px;
   position: relative;
   z-index: 10;
+  transition: 0.3s ease;
 }
 
 /* Icon Section */
+
+.icons-container {
+  padding: 4rem 4%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 2rem;
+  border-top: 0.8px var(--primary) solid;
+  border-bottom: 0.8px var(--primary) solid;
+  /* background: #d1f2ff; */
+}
+
+.icons-container .icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 1rem;
+
+  transition: 0.3s ease;
+}
+
+.icons-container .icons i {
+  height: 4rem;
+  width: 4rem;
+  line-height: 4rem;
+  font-size: 1.5rem;
+
+  border-radius: 50%;
+  background: #eee;
+  color: var(--primary);
+
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.icons-container .icons .content h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.icons-container .icons .content p {
+  font-size: 1rem;
+  color: var(--accent);
+  line-height: 1.4;
+}
+
+.icons-container .icons:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+.icons-container .icons:hover i {
+  background: #fff;
+  color: var(--primary);
+}
+
+.icons-container .icons:hover .content h3 {
+  color: var(--accent);
+}
+
+.icons-container .icons:hover .content p {
+  color: var(--text-light);
+}

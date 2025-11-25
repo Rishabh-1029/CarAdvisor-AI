@@ -1,0 +1,64 @@
+/* Footer Wrapper */
+.footer {
+  background: #d1f2ff;
+  padding: 3rem 12%;
+}
+
+.footer .footer-box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  text-align: left;
+  padding-left: 6rem;
+  gap: 8rem;
+}
+
+/* Footer Section Titles */
+.footer .footer-box-container .box h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.5px;
+}
+
+/* Footer Links */
+.footer .footer-box-container .box a {
+  width: 100%;
+  display: block;
+  font-size: 1rem;
+  color: var(--primary);
+  padding: 0.4rem 0;
+  transition: 0.3s ease;
+  letter-spacing: 0.3px;
+  text-align: left;
+}
+
+/* Icons inside footer links */
+.footer .footer-box-container .box a i {
+  margin-right: 0.6rem;
+  color: var(--accent);
+  transition: 0.3s ease;
+}
+
+.footer .footer-box-container .box a:hover {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.footer .footer-box-container .box a:hover i {
+  margin-right: 1rem;
+  color: var(--primary);
+}
+
+/* Copyright Bar */
+.footer .copyright {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--primary);
+
+  font-size: 0.95rem;
+  color: var(--primary);
+  letter-spacing: 0.4px;
+
+  text-align: left;
+}
