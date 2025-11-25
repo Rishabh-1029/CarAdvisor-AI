@@ -1,0 +1,85 @@
+/* NAVBAR WRAPPER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  background: var(--primary);
+  box-shadow: var(--box-shadow);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 8%;
+}
+
+/* LOGO */
+.logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+/* NAVIGATION LINKS */
+.navbar {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+/* LOGIN BUTTON SECTION */
+#login-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* ACTUAL LOGIN BUTTON */
+.btn {
+  background: var(--accent);
+  color: var(--primary);
+  padding: 0.6rem 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.btn:hover {
+  background: var(--accent-light);
+}
+
+/* LOGIN ICON (VISIBLE ON MOBILE) */
+#login-btn i {
+  display: none;
+  font-size: 2rem;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+/* MENU ICON (HAMBURGER) */
+#menu-btn {
+  display: none;
+  font-size: 2.2rem;
+  color: var(--text-dark);
+  cursor: pointer;
+}
