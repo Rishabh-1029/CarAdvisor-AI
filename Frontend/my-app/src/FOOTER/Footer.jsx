@@ -1,5 +1,9 @@
 import "./Footer.css";
 
+import Navbar from "../NAVBAR/navbar";
+import Hero from "../HERO/Hero";
+import Contact from "../CONTACT/contact";
+
 function Footer() {
   return (
     <section className="footer">
@@ -24,7 +28,7 @@ function Footer() {
         {/* Quick Links */}
         <div className="box">
           <h3>quick links</h3>
-          <a href="#home">
+          <a href="#Home">
             <i className="fa-solid fa-arrow-right"></i> home
           </a>
           <a href="#vehicles">
