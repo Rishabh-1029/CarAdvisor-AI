@@ -13,11 +13,9 @@ function Navbar() {
 
       {/* Navbar links */}
       <nav className="navbar">
-        <a href="#home">Home</a>
+        <a href="#hero">Home</a>
         <a href="#vehicles">Vehicles</a>
-        <a href="#services">Services</a>
-        <a href="#featured">Featured</a>
-        <a href="#reviews">Feedback</a>
+        <a href="#ourservices">Services</a>
         <a href="#contact">Contact</a>
       </nav>
 
