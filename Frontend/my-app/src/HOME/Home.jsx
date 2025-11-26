@@ -10,11 +10,25 @@ import Ourservices from "../OURSERVICES/Ourservices";
 function Home() {
   return (
     <div>
-      <Navbar />
-      <Hero />
-      <Ourservices />
-      <Contact />
-      <Footer />
+      <div id="navbar">
+        <Navbar />
+      </div>
+
+      <div id="hero">
+        <Hero />
+      </div>
+
+      <div id="ourservices">
+        <Ourservices />
+      </div>
+
+      <div id="contact">
+        <Contact />
+      </div>
+
+      <div id="footer">
+        <Footer />
+      </div>
     </div>
   );
 }
