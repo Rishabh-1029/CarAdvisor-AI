@@ -9,13 +9,15 @@ function Hero() {
         {/* LEFT TEXT BLOCK */}
         <div className="hero-left">
           <h1>
-            Find the Perfect Car. <br /> Predict the Future Cost.
+            Find the Perfect Car. <br /> Choose Smart. <br />
+            Drive True.
           </h1>
 
           <p className="subtitle">
-            Don't just buy a car based on price. Our AI analyzes your city,
-            usage, and fuel trends to recommend the best car for your budget
-            over the next 10 years.
+            Buying a car shouldn’t be a guess. <br />
+            Our AI analyzes your city, driving habits, and fuel trends to
+            recommend the perfect car for you that fits your budget, your
+            family, and your lifestyle.
           </p>
 
           <div className="cta-group">
@@ -29,11 +31,10 @@ function Hero() {
           <img src={car} alt="car" className="hero-car" />
         </div>
       </section>
-
       {/* Icon section */}
       <section className="icons-container">
         <div className="icons">
-          <i className="fa-solid fa-house"></i>
+          <i className="fa-solid fa-map-location-dot"></i>
           <div className="content">
             <h3>04+</h3>
             <p>branches</p>
@@ -41,7 +42,7 @@ function Hero() {
         </div>
 
         <div className="icons">
-          <i className="fa-solid fa-car"></i>
+          <i className="fa-solid fa-car-side"></i>
           <div className="content">
             <h3>50+</h3>
             <p>Cars Available</p>
@@ -49,18 +50,18 @@ function Hero() {
         </div>
 
         <div className="icons">
-          <i className="fa-solid fa-users"></i>
+          <i className="fa-solid fa-star"></i>
           <div className="content">
             <h3>50+</h3>
-            <p>happy Reviews</p>
+            <p>Happy Reviews</p>
           </div>
         </div>
 
         <div className="icons">
-          <i className="fa-solid fa-car"></i>
+          <i className="fa-solid fa-rocket"></i>
           <div className="content">
             <h3>20+</h3>
-            <p>upcoming cars</p>
+            <p>Upcoming Cars</p>
           </div>
         </div>
       </section>

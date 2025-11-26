@@ -3,12 +3,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8rem 4%;
+  padding: 6rem 4%;
   gap: 5rem;
   margin-top: 5rem;
 }
 
 /* LEFT TEXT SIDE */
+.hero-left h1 {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary);
+}
+
 .hero-left h1 {
   font-size: 3.4rem;
   font-weight: 700;
