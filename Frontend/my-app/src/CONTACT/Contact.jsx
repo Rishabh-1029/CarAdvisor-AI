@@ -1,6 +1,32 @@
 import "./Contact.css";
+import React, { useRef } from "react";
+
+import emailjs from "@emailjs/browser";
 
 function Contact() {
+  const formRef = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          alert("Thank You for connecting, Message sent successfully!");
+          formRef.current.reset();
+        },
+        (error) => {
+          console.error(error);
+          alert("Something went wrong. Please try again.");
+        }
+      );
+  };
   return (
     <section className="contact" id="contact">
       <h1 className="heading">
@@ -18,30 +44,43 @@ function Contact() {
         ></iframe>
 
         {/* CONTACT FORM */}
-        <form action="feedback_form.php" method="POST">
+        <form ref={formRef} className="contact-form" onSubmit={sendEmail}>
           <h3>get in touch</h3>
 
-          <input type="text" placeholder="Name" className="box" name="name" />
+          <input
+            type="text"
+            name="name"
+            className="box"
+            placeholder="Name"
+            required
+          />
+
           <input
             type="email"
-            placeholder="Email"
-            className="box"
             name="email"
+            placeholder="Email"
+            required
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+            className="box"
           />
+
           <input
-            type="number"
-            placeholder="Contact Number"
+            type="tel"
+            name="phone"
             className="box"
-            name="contact_number"
+            placeholder="Phone Number"
           />
+
           <textarea
-            className="box"
-            cols="30"
-            rows="10"
-            placeholder="Message"
             name="message"
-          ></textarea>
-          <input type="submit" value="send message" className="btn" />
+            className="box"
+            placeholder="Message"
+            required
+          />
+
+          <button className="btn" type="submit">
+            Send Message
+          </button>
         </form>
       </div>
     </section>
