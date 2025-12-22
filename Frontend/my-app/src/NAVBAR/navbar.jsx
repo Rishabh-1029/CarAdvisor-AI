@@ -13,10 +13,10 @@ function Navbar() {
 
       {/* Navbar links */}
       <nav className="navbar">
-        <a href="#hero">Home</a>
-        <a href="#vehicles">Vehicles</a>
-        <a href="#ourservices">Services</a>
-        <a href="#contact">Contact</a>
+        <a href="/#hero">Home</a>
+        <a href="/#vehicles">Vehicles</a>
+        <a href="/#ourservices">Services</a>
+        <a href="/#contact">Contact</a>
       </nav>
 
       {/* Login button */}
