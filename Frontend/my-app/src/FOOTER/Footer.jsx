@@ -1,6 +1,18 @@
 import "./Footer.css";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
+  const navigate = useNavigate();
+
+  const goToSection = (id) => {
+    navigate("/");
+
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
   return (
     <section className="footer">
       <div className="footer-box-container">
@@ -8,16 +20,16 @@ function Footer() {
         <div className="box">
           <h3>our branches</h3>
           <a>
-            <i className="fa-solid fa-location-dot"></i> Delhi
+            <i className="fa-solid fa-location-dot" /> Delhi
           </a>
           <a>
-            <i className="fa-solid fa-location-dot"></i> Mumbai
+            <i className="fa-solid fa-location-dot" /> Mumbai
           </a>
           <a>
-            <i className="fa-solid fa-location-dot"></i> Chennai
+            <i className="fa-solid fa-location-dot" /> Chennai
           </a>
           <a>
-            <i className="fa-solid fa-location-dot"></i> Bengaluru
+            <i className="fa-solid fa-location-dot" /> Bengaluru
           </a>
         </div>
 
@@ -25,34 +37,34 @@ function Footer() {
         <div className="box">
           <h3>quick links</h3>
 
-          <a href="#hero">
+          <button onClick={() => goToSection("hero")}>
             <i className="fa-solid fa-arrow-right"></i> home
-          </a>
+          </button>
 
-          <a href="#vehicles">
+          <button onClick={() => goToSection("vehicles")}>
             <i className="fa-solid fa-arrow-right"></i> vehicles
-          </a>
+          </button>
 
-          <a href="#ourservices">
+          <button onClick={() => goToSection("ourservices")}>
             <i className="fa-solid fa-arrow-right"></i> services
-          </a>
+          </button>
 
-          <a href="#featured">
+          <button onClick={() => goToSection("featured")}>
             <i className="fa-solid fa-arrow-right"></i> featured
-          </a>
+          </button>
         </div>
 
-        {/* Contact Links */}
+        {/* Contact */}
         <div className="box">
-          <h3>Contact</h3>
+          <h3>contact</h3>
 
-          <a href="#contact">
+          <button onClick={() => goToSection("contact")}>
             <i className="fa-solid fa-phone"></i>+91 8700122543
-          </a>
+          </button>
 
-          <a href="#contact">
+          <button onClick={() => goToSection("contact")}>
             <i className="fa-solid fa-envelope"></i>info@TrueDrive.co.in
-          </a>
+          </button>
 
           <a>
             <i className="fa-solid fa-location-dot"></i> Delhi, india

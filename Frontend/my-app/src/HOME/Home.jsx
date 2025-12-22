@@ -11,12 +11,15 @@ import Ourservices from "../OURSERVICES/Ourservices";
 import Findcar from "../FINDCAR/Findcar";
 import Report from "../REPORT/Report";
 
+import ScrollToTop from "../ScrollTop/ScrollToTop";
+
 function Home() {
   return (
     <div>
       <div id="navbar">
         <Navbar />
       </div>
+
       <div className="Main-layout">
         <Routes>
           {/* Home */}
@@ -33,9 +36,6 @@ function Home() {
                 <section id="contact">
                   <Contact />
                 </section>
-                <section id="footer">
-                  <Footer />
-                </section>
               </>
             }
           />
@@ -46,10 +46,8 @@ function Home() {
             element={
               <>
                 <section id="findcar">
+                  <ScrollToTop />
                   <Findcar />
-                </section>
-                <section id="footer">
-                  <Footer />
                 </section>
               </>
             }
@@ -61,15 +59,28 @@ function Home() {
             element={
               <>
                 <section id="report">
+                  <ScrollToTop />
                   <Report />
                 </section>
-                <section id="footer">
-                  <Footer />
+              </>
+            }
+          />
+
+          {/*  */}
+          <Route
+            path="/expense"
+            element={
+              <>
+                <section id="expense">
+                  <ScrollToTop />
                 </section>
               </>
             }
           />
         </Routes>
+      </div>
+      <div id="footer">
+        <Footer />
       </div>
     </div>
   );
