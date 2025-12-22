@@ -1,22 +1,34 @@
 import "./navbar.css";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const goToSection = (id) => {
+    navigate("/");
+
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
   return (
     <header className="header">
       {/* Menu Icon */}
       <div id="menu-btn" className="fa-solid fa-bars"></div>
 
       {/* Logo */}
-      <a href="#" className="logo">
+      <a href="/#hero" className="logo">
         True<span>Drive</span>
       </a>
 
       {/* Navbar links */}
       <nav className="navbar">
-        <a href="/#hero">Home</a>
-        <a href="/#vehicles">Vehicles</a>
-        <a href="/#ourservices">Services</a>
-        <a href="/#contact">Contact</a>
+        <a onClick={() => goToSection("hero")}>Home</a>
+        <a onClick={() => goToSection("vehicles")}>Vehicles</a>
+        <a onClick={() => goToSection("ourservices")}>Services</a>
+        <a onClick={() => goToSection("contact")}>Contact</a>
       </nav>
 
       {/* Login button */}
