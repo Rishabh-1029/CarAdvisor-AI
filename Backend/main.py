@@ -1,17 +1,50 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
-app = FastAPI(title='Truedrive')
+app = FastAPI()
 
+origins = [
+    "http://localhost:5173",  
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],       
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],          
-    allow_headers=["*"],        
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-@app.get('/',tags=['Home'])
-def readroots():
-    return {"Welcome":"TrueDrive by Rishabh."}
+class CarRequest(BaseModel):
+    city: str
+    budget: str
+    fuelType: str
+    fuelFlexibility: bool
+    seats: str
+    usage: str
 
+# Endpoint to process the data
+@app.post("/process-car-data")
+async def process_car_data(data: CarRequest):
+    # Convert to dict
+    car_data = data.dict()
+
+    processed_data = {
+        "city": car_data["city"],
+        "budget": car_data["budget"],
+        "fuelType": car_data["fuelType"],
+        "fuelFlexibility": car_data["fuelFlexibility"],
+        "seats": car_data["seats"],
+        "usage": car_data["usage"],
+    }
+
+    # processed_data = {
+    #     "recommendedBudget": f"{int(car_data['budget'].replace(',', '')) * 1.1:.0f}",  # 10% increase
+    #     "suggestedFuel": car_data["fuelType"] if car_data["fuelFlexibility"] else "Strict " + car_data["fuelType"],
+    #     "maxSeats": int(car_data["seats"]),
+    #     "city": car_data["city"],
+    #     "averageUse": car_data["usage"],
+    #     "message": f"Processing complete for {car_data['city']}"
+    # }
+
+    return {"status": "success", "data": processed_data}
