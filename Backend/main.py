@@ -38,13 +38,4 @@ async def process_car_data(data: CarRequest):
         "usage": car_data["usage"],
     }
 
-    # processed_data = {
-    #     "recommendedBudget": f"{int(car_data['budget'].replace(',', '')) * 1.1:.0f}",  # 10% increase
-    #     "suggestedFuel": car_data["fuelType"] if car_data["fuelFlexibility"] else "Strict " + car_data["fuelType"],
-    #     "maxSeats": int(car_data["seats"]),
-    #     "city": car_data["city"],
-    #     "averageUse": car_data["usage"],
-    #     "message": f"Processing complete for {car_data['city']}"
-    # }
-
     return {"status": "success", "data": processed_data}

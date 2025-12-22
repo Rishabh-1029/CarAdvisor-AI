@@ -1,6 +1,8 @@
 import "./Ourservices.css";
+import { useNavigate } from "react-router-dom";
 
 function Ourservices() {
+  const navigate = useNavigate();
   return (
     <section className="services" id="services">
       <h1 className="heading">
@@ -16,9 +18,9 @@ function Ourservices() {
             <br />
             Start your adventure now!
           </p>
-          <a href="#featured" className="btn">
+          <button className="btn" onClick={() => navigate("/findcar")}>
             Explore
-          </a>
+          </button>
         </div>
 
         <div className="box">
