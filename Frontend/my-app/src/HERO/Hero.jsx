@@ -1,7 +1,11 @@
 import "./Hero.css";
 import car from "../assets/car.png";
+import { useNavigate } from "react-router-dom";
+import Findcar from "../FINDCAR/Findcar";
 
 function Hero() {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* HERO SECTION */}
@@ -21,7 +25,12 @@ function Hero() {
           </p>
 
           <div className="cta-group">
-            <button className="primary-btn">Find My Car Now ➜</button>
+            <button
+              className="primary-btn"
+              onClick={() => navigate("/findcar")}
+            >
+              Find My Car Now ➜
+            </button>
           </div>
         </div>
 
