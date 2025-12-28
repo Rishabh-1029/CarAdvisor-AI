@@ -37,8 +37,9 @@ function Findcar() {
       const result = await res.json();
       console.log("API Response:", result);
 
-      if (result && result.data) {
-        navigate("/report", { state: { reportData: result.data } });
+      if (result && result.cars) {
+        console.log("Navigating with data:", result.cars);
+        navigate("/report", { state: { reportData: result } });
       }
     } catch (err) {
       console.error("Error:", err);
