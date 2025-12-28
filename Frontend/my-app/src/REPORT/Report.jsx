@@ -5,41 +5,81 @@ function Report() {
   const location = useLocation();
   const reportData = location.state?.reportData;
 
-  if (!reportData) {
-    return <p>No data available. Please fill the form first.</p>;
+  // Guard: direct access without data
+  if (!reportData || !Array.isArray(reportData.cars)) {
+    return (
+      <div className="report-container">
+        <p>No data available. Please fill the form first.</p>
+      </div>
+    );
   }
-  const reportArray = Array.isArray(reportData) ? reportData : [reportData];
+
+  const cars = reportData.cars;
 
   return (
     <div className="report-container">
-      <h1>Car Recommendations</h1>
+      <h1>
+        <span className="car-rec-title">Car</span> Recommendations
+      </h1>
+
       <div className="cards-container">
-        {reportArray.map((car, index) => (
-          <div className="car-card" key={index}>
-            <img
-              src={car.image || "https://via.placeholder.com/150"}
-              alt={car.model || "Car"}
-              className="car-image"
-            />
-            <div className="car-info">
-              <h2>{car.model || "Unknown Model"}</h2>
-              <p>
-                <strong>City:</strong> {car.city}
-              </p>
-              <p>
-                <strong>Price:</strong> ₹{car.price}
-              </p>
-              <p>
-                <strong>Fuel Type:</strong> {car.fuelType}
-              </p>
-              <p>
-                <strong>Seats:</strong> {car.seats}
-              </p>
-              <p>
-                <strong>Expected Usage:</strong> {car.usage} km/month
-              </p>
+        {cars.map((car, index) => (
+          <a
+            key={car.id ?? index}
+            href={car.link}
+            target="_blank"
+            rel="noreferrer"
+            className="car-card"
+          >
+            {car.fuel && <span className="fuel-badge">{car.fuel}</span>}
+            {car.accuracy && <span className="acc-badge">{car.accuracy}</span>}
+
+            <div className="car-card-list">
+              {/* Image Section */}
+              <div className="car-image-wrapper">
+                <img
+                  src={car.img}
+                  alt={car.car_name || "Car"}
+                  className="car-image"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className="car-info">
+                {/* Car Name */}
+                <h2 className="car-name">{car.car_name || "Unknown Model"}</h2>
+
+                {/* Price */}
+                {car.price && <div className="car-price">{car.price}</div>}
+
+                {/* Specs Row */}
+                <div className="car-specs">
+                  {car.mileage && (
+                    <span className="spec-item">{car.mileage}</span>
+                  )}
+
+                  {car.body_type && (
+                    <span className="spec-item">{car.body_type}</span>
+                  )}
+
+                  {car.transmission && (
+                    <span className="spec-item">{car.transmission}</span>
+                  )}
+                </div>
+
+                {/* Secondary Info */}
+                <div className="car-meta">
+                  {car.seating && <span>{car.seating} Seater</span>}
+                  {car.body_type && <span>{car.body_type}</span>}
+                  {car.city && <span>{car.city}</span>}
+                </div>
+
+                {/* CTA */}
+                <div className="car-cta">View Details →</div>
+              </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
