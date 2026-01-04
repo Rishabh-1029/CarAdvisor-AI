@@ -66,7 +66,7 @@ function Home() {
             }
           />
 
-          {/*  */}
+          {/* Expense forecast */}
           <Route
             path="/expense"
             element={
@@ -78,6 +78,19 @@ function Home() {
             }
           />
         </Routes>
+
+        {/* Car listing */}
+        <Route
+          path="/listcar"
+          element={
+            <>
+              <section id="listcar">
+                <ScrollToTop />
+                <Findcar />
+              </section>
+            </>
+          }
+        />
       </div>
       <div id="footer">
         <Footer />
