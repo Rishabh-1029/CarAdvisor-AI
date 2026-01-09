@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from services.findcar import findcar
+from services.carlisting import carlisting
 from typing import List
 
 app = FastAPI()
@@ -31,6 +32,9 @@ class CarRequest(BaseModel):
     fuelFlexibility: bool
     seats: str
     usage: str
+    transmission: str
+    transmissionFlexibility: bool
+
 
 class CarResponse(BaseModel):
     status: str
@@ -46,3 +50,12 @@ async def process_car_data(data: CarRequest):
     
 
     return {"status": "success", "count": len(cars), "cars": cars}
+
+@app.get("/car-listing")
+async def car_listing():
+    cars = carlisting()
+    return {
+        "status": "success",
+        "count": len(cars),
+        "cars": cars
+    }

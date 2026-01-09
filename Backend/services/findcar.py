@@ -1,36 +1,55 @@
-def findcar(car_data: dict):
-    city = car_data["city"]
-    fuel_pref = car_data["fuelType"]
+from sklearn.neighbors import NearestNeighbors
+import numpy as np
+from services.vector_store import df, vectors
+from services.filters import apply_hard_filters
+from services.user_vector import build_user_vector
+from services.formatters import get_fuel_type, get_transmission, format_price
 
-    cars = [
-        {
-            "id": 1,
-            "car_name": "Volvo XC90",
-            "city": city,
-            "fuel": "Petrol",
-            "price": "₹96,97,240",
-            "mileage": "13 - 17 km/l",
-            "seating": "7",
-            "body_type": "SUV",
-            "transmission": "Automatic",
-            "accuracy": "86.02%",
-            "link": "https://www.volvocars.com/in/cars/xc90/",
-            "img": "https://wizz.volvocars.com/images/2026/256/exterior/studio/front/exterior-studio-front_A72886FCC0B78E67CFFE35B3034035DF3A3A6666.png?client=carousel&w=1080"
-        },
-        {
-            "id": 2,
-            "car_name": "BMW X5",
-            "city": city,
-            "fuel": "Petrol",
-            "price": "₹93,60,000",
-            "mileage": "12 km/l",
-            "seating": "5",
-            "body_type": "SUV",
-            "transmission": "Automatic",
-            "accuracy": "82.48%",
-            "link":"https://www.bmw.in/en/all-models/x-series/x5/bmw-x5.html",
-            "img": "https://bmw.scene7.com/is/image/BMW/g05_Layout_Carousel_exterior_highlights_headlights:3to2?fmt=webp&wid=2560&hei=1707"
-        }
-    ]
+def findcar(user):
+    filtered_df = apply_hard_filters(df, user)
 
-    return cars
+    if filtered_df.empty:
+        return []
+
+    # get row indexes of surviving cars
+    filtered_idx = filtered_df.index.to_numpy()
+
+    # get only allowed vectors
+    filtered_vectors = vectors[filtered_idx]
+
+    # build user vector
+    user_vector = np.array([build_user_vector(user)])
+
+    # create temporary KNN on filtered space
+    knn = NearestNeighbors(metric="cosine", algorithm="brute")
+    knn.fit(filtered_vectors)
+
+    distances, indices = knn.kneighbors(user_vector, n_neighbors=min(30, len(filtered_vectors)))
+
+    results = []
+
+    for local_idx, dist in zip(indices[0], distances[0]):
+        real_idx = filtered_idx[local_idx]
+        row = df.iloc[real_idx]
+
+        similarity = (1 - dist) * 100
+
+        results.append({
+            "id": row["car_id"],
+            "car_name": row["car_name"],
+            "city": user["city"],
+            "fuel": get_fuel_type(row),
+            "price": format_price(row["min_price"], row["max_price"]),
+            "mileage": f"{row['mileage']} km/l",
+            "seating": str(row["seat"]),
+            "body_type": row["car_body_type"],
+            "transmission": get_transmission(row),
+            "accuracy": f"{similarity:.2f}%",
+            "link": row["web_link"],
+            "img": row["img"],
+        })
+
+        if len(results) == 20:
+            break
+
+    return results
