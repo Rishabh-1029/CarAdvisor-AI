@@ -10,9 +10,11 @@ function Findcar() {
     city: "",
     budget: "",
     fuelType: "",
-    fuelFlexibility: true,
+    fuelFlexibility: false,
     seats: "",
     usage: "",
+    transmission: "",
+    transmissionFlexibility: false,
   });
 
   const handleChange = (e) => {
@@ -24,10 +26,19 @@ function Findcar() {
     setFormData({ ...formData, fuelFlexibility: !formData.fuelFlexibility });
   };
 
+  const toggleTransmissionFlexibility = () => {
+    setFormData({
+      ...formData,
+      transmissionFlexibility: !formData.transmissionFlexibility,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      console.log("User Response:", formData);
+
       const res = await fetch("http://localhost:8000/process-car-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -56,7 +67,12 @@ function Findcar() {
         <form className="findcar-form" onSubmit={handleSubmit}>
           {/* CITY */}
           <label>City</label>
-          <select name="city" value={formData.city} onChange={handleChange}>
+          <select
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          >
             <option value="">Select your city</option>
             <option value="Delhi">Delhi</option>
             <option value="Mumbai">Mumbai</option>
@@ -66,14 +82,19 @@ function Findcar() {
 
           {/* BUDGET */}
           <label>Budget (₹)</label>
-          <input
-            type="number"
+          <select
             name="budget"
-            placeholder="Enter max budget"
             value={formData.budget}
-            onWheel={(e) => e.target.blur()}
             onChange={handleChange}
-          />
+            required
+          >
+            <option value="">Select budget range</option>
+            <option value="500000">Up to ₹5 Lakhs</option>
+            <option value="800000">Up to ₹8 Lakhs</option>
+            <option value="1200000">Up to ₹12 Lakhs</option>
+            <option value="2000000">Up to ₹20 Lakhs</option>
+            <option value="Above">Above ₹20 Lakhs</option>
+          </select>
 
           {/* FUEL TYPE */}
           <div className="fuel-row">
@@ -99,18 +120,25 @@ function Findcar() {
               name="fuelType"
               value={formData.fuelType}
               onChange={handleChange}
+              required
             >
               <option value="">Select fuel type</option>
-              <option value="Petrol">Petrol</option>
-              <option value="Diesel">Diesel</option>
-              <option value="Electric">Electric</option>
-              <option value="CNG">CNG</option>
+              <option value="petrol">Petrol</option>
+              <option value="diesel">Diesel</option>
+              <option value="ev">Electric</option>
+              <option value="cng">CNG</option>
+              <option value="hybrid">Hybrid</option>
             </select>
           </div>
 
           {/* SEATING */}
           <label>Seating Capacity</label>
-          <select name="seats" value={formData.seats} onChange={handleChange}>
+          <select
+            name="seats"
+            value={formData.seats}
+            onChange={handleChange}
+            required
+          >
             <option value="">Select seating capacity</option>
             <option value="4">4 Seater</option>
             <option value="5">5 Seater</option>
@@ -118,15 +146,49 @@ function Findcar() {
           </select>
 
           {/* USAGE */}
-          <label>Average Monthly Usage (km)</label>
-          <input
-            type="number"
+          <label>Average Monthly Usage</label>
+          <select
             name="usage"
-            placeholder="Ex: 1000"
             value={formData.usage}
             onChange={handleChange}
-            onWheel={(e) => e.target.blur()}
-          />
+            required
+          >
+            <option value="">Select usage level</option>
+            <option value="Low">Occasional usage</option>
+            <option value="Mid">Daily commute</option>
+            <option value="High">Long daily usage</option>
+          </select>
+
+          {/* Transmission */}
+          <div className="fuel-row">
+            <div className="fuel-header">
+              <label>Transmission Type</label>
+              <div className="fuel-switch">
+                <span className="fuel-value">
+                  {formData.transmissionFlexibility ? "Flexible" : "Strict"}
+                </span>
+                <label className="switch">
+                  <input
+                    type="checkbox"
+                    checked={formData.transmissionFlexibility}
+                    onChange={toggleTransmissionFlexibility}
+                  />
+                  <span className="slider" />
+                </label>
+              </div>
+            </div>
+
+            <select
+              name="transmission"
+              value={formData.transmission}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Transmission Type</option>
+              <option value="manual">Manual</option>
+              <option value="automatic">Automatic</option>
+            </select>
+          </div>
 
           <button type="submit" className="submit-btn">
             View Cars
