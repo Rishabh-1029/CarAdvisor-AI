@@ -71,7 +71,6 @@ function Report() {
                 {/* Secondary Info */}
                 <div className="car-meta">
                   {car.seating && <span>{car.seating} Seater</span>}
-                  {car.body_type && <span>{car.body_type}</span>}
                   {car.city && <span>{car.city}</span>}
                 </div>
 
