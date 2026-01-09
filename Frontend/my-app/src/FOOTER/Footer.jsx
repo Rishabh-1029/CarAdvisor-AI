@@ -41,7 +41,7 @@ function Footer() {
             <i className="fa-solid fa-arrow-right"></i> home
           </button>
 
-          <button onClick={() => goToSection("vehicles")}>
+          <button onClick={() => navigate("/carlist")}>
             <i className="fa-solid fa-arrow-right"></i> vehicles
           </button>
 

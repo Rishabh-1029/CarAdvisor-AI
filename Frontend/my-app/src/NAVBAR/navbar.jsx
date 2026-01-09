@@ -26,7 +26,7 @@ function Navbar() {
       {/* Navbar links */}
       <nav className="navbar">
         <a onClick={() => goToSection("hero")}>Home</a>
-        <a onClick={() => goToSection("vehicles")}>Vehicles</a>
+        <a onClick={() => navigate("/carlist")}>Vehicles</a>
         <a onClick={() => goToSection("ourservices")}>Services</a>
         <a onClick={() => goToSection("contact")}>Contact</a>
       </nav>

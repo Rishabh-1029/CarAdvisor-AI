@@ -11,6 +11,8 @@ import Ourservices from "../OURSERVICES/Ourservices";
 import Findcar from "../FINDCAR/Findcar";
 import Report from "../REPORT/Report";
 
+import Carlist from "../CARLIST/Carlist";
+
 import ScrollToTop from "../ScrollTop/ScrollToTop";
 
 function Home() {
@@ -77,20 +79,20 @@ function Home() {
               </>
             }
           />
-        </Routes>
 
-        {/* Car listing */}
-        <Route
-          path="/listcar"
-          element={
-            <>
-              <section id="listcar">
-                <ScrollToTop />
-                <Findcar />
-              </section>
-            </>
-          }
-        />
+          {/*Car Listing*/}
+          <Route
+            path="/carlist"
+            element={
+              <>
+                <section id="carlist">
+                  <ScrollToTop />
+                  <Carlist />
+                </section>
+              </>
+            }
+          />
+        </Routes>
       </div>
       <div id="footer">
         <Footer />

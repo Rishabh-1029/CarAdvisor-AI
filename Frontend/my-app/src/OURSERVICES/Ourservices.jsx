@@ -18,7 +18,7 @@ function Ourservices() {
             <br />
             Start your adventure now!
           </p>
-          <button className="btn" onClick={() => navigate("/findcar")}>
+          <button className="btn" onClick={() => navigate("/carlist")}>
             Explore
           </button>
         </div>
