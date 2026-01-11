@@ -11,16 +11,12 @@ def findcar(user):
     if filtered_df.empty:
         return []
 
-    # get row indexes of surviving cars
     filtered_idx = filtered_df.index.to_numpy()
 
-    # get only allowed vectors
     filtered_vectors = vectors[filtered_idx]
 
-    # build user vector
     user_vector = np.array([build_user_vector(user)])
 
-    # create temporary KNN on filtered space
     knn = NearestNeighbors(metric="cosine", algorithm="brute")
     knn.fit(filtered_vectors)
 
@@ -40,13 +36,15 @@ def findcar(user):
             "city": user["city"],
             "fuel": get_fuel_type(row),
             "price": format_price(row["min_price"], row["max_price"]),
-            "mileage": f"{row['mileage']} km/l",
+            "mileage": f"{row['mileage']}",
             "seating": str(row["seat"]),
             "body_type": row["car_body_type"],
             "transmission": get_transmission(row),
             "accuracy": f"{similarity:.2f}%",
             "link": row["web_link"],
             "img": row["img"],
+            "description": row["description"],
+            "adas": str(row["adas"]),
         })
 
         if len(results) == 20:
