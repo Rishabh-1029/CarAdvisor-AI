@@ -50,7 +50,9 @@ function Findcar() {
 
       if (result && result.cars) {
         console.log("Navigating with data:", result.cars);
-        navigate("/report", { state: { reportData: result } });
+        navigate("/report", {
+          state: { reportData: result, formData: formData },
+        });
       }
     } catch (err) {
       console.error("Error:", err);
