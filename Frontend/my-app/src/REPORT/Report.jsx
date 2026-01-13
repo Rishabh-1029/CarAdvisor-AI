@@ -1,12 +1,22 @@
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { MdAutoAwesome } from "react-icons/md";
+
 import "./Report.css";
+import Ailoading from "../AILOADING/Ailoading.jsx";
+import { useState, useEffect } from "react";
 
 function Report() {
   const navigate = useNavigate();
   const location = useLocation();
   const reportData = location.state?.reportData;
   const formData = location.state?.formData || {};
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 2800);
+    return () => clearTimeout(t);
+  }, []);
 
   const usageMap = {
     Low: "Occasional",
@@ -15,6 +25,10 @@ function Report() {
   };
 
   const usage = usageMap[formData.usage] || "Any";
+
+  if (loading) {
+    return <Ailoading />;
+  }
 
   if (
     !reportData ||
@@ -81,9 +95,11 @@ function Report() {
   return (
     <div className="report-container-ml">
       <h2 className="report-title-ml">
-        <span className="car-rec-title-ml">AI</span> Recommendations
+        <span className="car-rec-title-ml">
+          <MdAutoAwesome size={36} /> AI
+        </span>{" "}
+        Recommendations
       </h2>
-
       <div className="car-layout-ml">
         {/* LEFT */}
         <aside className="filter-panel-ml">
