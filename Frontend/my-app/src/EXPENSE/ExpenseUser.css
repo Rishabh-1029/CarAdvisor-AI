@@ -1,0 +1,115 @@
+.expense-user-container {
+  width: 50%;
+  margin: 8rem auto 3rem auto;
+  padding: 3rem 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  transition: 0.4s ease;
+}
+
+.expense-user-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.expense-user-title {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+}
+
+.expense-user-title .forecast-title {
+  color: var(--accent);
+}
+
+.expense-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 1rem;
+}
+
+.expense-user-form label {
+  font-size: 1.25rem;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.expense-user-form input,
+.expense-user-form select {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-size: 1rem;
+  transition: 0.25s ease;
+}
+
+.expense-user-form select {
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Number Scroll remove */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.expense-user-form input:hover,
+.expense-user-form select:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(58, 198, 255, 0.4);
+}
+
+/* Submit Button */
+
+.expense-user-submit-btn {
+  margin-top: 1rem;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.104);
+  transition: 0.35s ease;
+}
+
+.expense-user-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(58, 199, 255, 0.104);
+  background: var(--accent-light);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .expense-user-container {
+    width: 90%;
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .expense-user-title {
+    font-size: 2rem;
+  }
+
+  .expense-user-submit-btn {
+    font-size: 1.1rem;
+  }
+}
