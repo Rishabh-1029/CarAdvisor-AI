@@ -1,5 +1,7 @@
 import "./Footer.css";
 import { useNavigate } from "react-router-dom";
+import { MdAutoAwesome } from "react-icons/md";
+import { FaLinkedin, FaUser } from "react-icons/fa";
 
 function Footer() {
   const navigate = useNavigate();
@@ -49,8 +51,8 @@ function Footer() {
             <i className="fa-solid fa-arrow-right"></i> services
           </button>
 
-          <button onClick={() => goToSection("featured")}>
-            <i className="fa-solid fa-arrow-right"></i> featured
+          <button onClick={() => navigate("/findcar")}>
+            <i className="fa-solid fa-arrow-right"></i> CarAdvisor AI
           </button>
         </div>
 
@@ -58,17 +60,42 @@ function Footer() {
         <div className="box">
           <h3>contact</h3>
 
-          <button onClick={() => goToSection("contact")}>
+          <button onClick={() => (window.location.href = "tel:+918700122543")}>
             <i className="fa-solid fa-phone"></i>+91 8700122543
           </button>
 
-          <button onClick={() => goToSection("contact")}>
+          <button
+            onClick={() =>
+              (window.location.href = "mailto:rspsurana@gmail.com")
+            }
+          >
             <i className="fa-solid fa-envelope"></i>info@TrueDrive.co.in
           </button>
 
-          <a>
-            <i className="fa-solid fa-location-dot"></i> Delhi, india
-          </a>
+          <button
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/in/rishabh-surana-718582253/",
+                "_blank"
+              )
+            }
+          >
+            <i>
+              <FaLinkedin size={16.5} />
+            </i>
+            Rishabh Surana
+          </button>
+
+          <button
+            onClick={() =>
+              window.open("https://rishabh-surana.netlify.app/", "_blank")
+            }
+          >
+            <i>
+              <FaUser size={16} />
+            </i>
+            Developer Portfolio
+          </button>
         </div>
       </div>
 
