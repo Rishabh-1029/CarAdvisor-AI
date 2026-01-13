@@ -1,5 +1,6 @@
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
+import { MdAutoAwesome } from "react-icons/md";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -31,8 +32,12 @@ function Navbar() {
         <a onClick={() => goToSection("contact")}>Contact</a>
       </nav>
 
-      {/* Login button */}
+      {/* Login + AI button */}
       <div id="login-btn">
+        <a onClick={() => navigate("/findcar")} className="carAdvisior-AI-btn">
+          <MdAutoAwesome size={18} />
+          CarAdvisor AI
+        </a>
         <button type="button" className="btn">
           Login
         </button>

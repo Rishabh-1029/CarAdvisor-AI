@@ -40,10 +40,38 @@
   letter-spacing: 0.5px;
   transition: 0.3s ease;
   cursor: pointer;
+  align-items: center;
 }
 
 .navbar a:hover {
   color: var(--accent);
+}
+
+/* Ai Button */
+.carAdvisior-AI-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  border: 1px solid var(--accent);
+  padding: 6px 12px;
+  border-radius: 10px;
+
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carAdvisior-AI-btn:hover {
+  background: rgba(37, 99, 235, 0.12);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.15);
+  transform: translateY(-1px);
+  border: 1px solid var(--accent);
 }
 
 /* LOGIN BUTTON SECTION */
