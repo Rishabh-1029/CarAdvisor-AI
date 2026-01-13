@@ -1,15 +1,15 @@
 def apply_hard_filters(df, user):
-    # ---------- Budget ----------
+    # Budget 
     if user["budget"] == "Above":
         df = df[df["max_price"] >= 2000000]
     else:
         max_budget = int(user["budget"])
         df = df[df["min_price"] <= max_budget]
 
-    # ---------- Seating ----------
+    #  Seating 
     df = df[df["seat"] >= int(user["seats"])]
 
-    # ---------- Fuel (Strict) ----------
+    #  Fuel (Strict) 
     FUEL_MAP = {
         "petrol": "fuel_petrol",
         "diesel": "fuel_diesel",
@@ -28,7 +28,7 @@ def apply_hard_filters(df, user):
 
         df = df[df[fuel_col] == 1]
 
-    # ---------- Transmission (Strict) ----------
+    #  Transmission (Strict) 
     TRANS_MAP = {
         "manual": "transmission_manual",
         "automatic": "transmission_automatic"

@@ -24,7 +24,7 @@ def build_user_vector(user):
         "7": [0, 0, 1],
     }
 
-    city_vector = [1, 0]  # city_use, highway_use
+    city_vector = [1, 0]
 
     return [
         *fuel_map[user["fuelType"]],

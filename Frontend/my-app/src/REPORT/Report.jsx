@@ -1,24 +1,12 @@
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Report.css";
 
 function Report() {
+  const navigate = useNavigate();
   const location = useLocation();
   const reportData = location.state?.reportData;
   const formData = location.state?.formData || {};
-
-  if (
-    !reportData ||
-    !Array.isArray(reportData.cars) ||
-    reportData.cars.length === 0
-  ) {
-    return (
-      <div className="report-container-ml">
-        <p>No data available. Please fill the form first.</p>
-      </div>
-    );
-  }
-
-  const cars = reportData.cars;
 
   const usageMap = {
     Low: "Occasional",
@@ -27,6 +15,68 @@ function Report() {
   };
 
   const usage = usageMap[formData.usage] || "Any";
+
+  if (
+    !reportData ||
+    !Array.isArray(reportData.cars) ||
+    reportData.cars.length === 0
+  ) {
+    return (
+      <div className="cars-not-exist-ml">
+        <aside className="filter-panel-ml">
+          <h3>
+            <p>This combination does not exist in the Indian market</p>
+          </h3>
+
+          <div className="pref-row-ml">
+            <span>City</span>
+            <strong>{formData.city || "Any"}</strong>
+          </div>
+
+          <div className="pref-row-ml">
+            <span>Fuel</span>
+            <strong>{formData.fuelType}</strong>
+          </div>
+
+          <div className="pref-row-ml">
+            <span>Transmission</span>
+            <strong>{formData.transmission}</strong>
+          </div>
+
+          <div className="pref-row-ml">
+            <span>Seat</span>
+            <strong>{formData.seats} Seater</strong>
+          </div>
+
+          <div className="pref-row-ml">
+            <span>usage</span>
+            <strong>{usage}</strong>
+          </div>
+
+          <div className="pref-row-ml">
+            <span>Budget</span>
+            <strong>
+              {formData.budget === "Above"
+                ? "Above ₹ 2,000,000"
+                : `Up to ₹ ${Number(formData.budget).toLocaleString()}`}
+            </strong>
+          </div>
+
+          <div className="pref-note-ml">
+            These preferences are inferred by the AI based on your inputs.
+          </div>
+          <button
+            className="car-cta-ml-explore"
+            onClick={() => navigate("/carlist")}
+          >
+            Browse All Available Cars
+          </button>
+        </aside>
+      </div>
+    );
+  }
+
+  const cars = reportData.cars;
 
   return (
     <div className="report-container-ml">

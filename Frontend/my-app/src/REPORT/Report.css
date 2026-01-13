@@ -25,6 +25,25 @@
   background: rgba(15, 23, 42, 0.18);
 }
 
+/* Car Not exist */
+
+.cars-not-exist-ml {
+  gap: 48px;
+  align-items: center;
+  margin: 140px auto 60px;
+  justify-content: center;
+  max-width: fit-content;
+}
+
+.cars-not-exist-ml .filter-panel-ml p {
+  padding: 20px;
+}
+
+.car-cta-ml-explore {
+  margin-top: 16px;
+  /* Css is same as car-cta-ml-explore */
+}
+
 /* LEFT PANEL */
 
 .filter-panel-ml {
@@ -226,7 +245,7 @@
 }
 
 /* CTA */
-
+.car-cta-ml-explore,
 .car-cta-ml {
   display: inline-flex;
   align-items: center;
@@ -243,8 +262,10 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transition: all 260ms ease;
   width: 100%;
+  cursor: pointer;
 }
 
+.car-cta-ml-explore:hover,
 .car-cta-ml:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45),
