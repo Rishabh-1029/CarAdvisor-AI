@@ -47,12 +47,12 @@ function Footer() {
             <i className="fa-solid fa-arrow-right"></i> vehicles
           </button>
 
-          <button onClick={() => goToSection("ourservices")}>
-            <i className="fa-solid fa-arrow-right"></i> services
-          </button>
-
           <button onClick={() => navigate("/findcar")}>
             <i className="fa-solid fa-arrow-right"></i> CarAdvisor AI
+          </button>
+
+          <button onClick={() => navigate("/expense")}>
+            <i className="fa-solid fa-arrow-right"></i> Expense Forecast
           </button>
         </div>
 

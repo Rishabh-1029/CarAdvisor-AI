@@ -12,6 +12,8 @@ import Findcar from "../FINDCAR/Findcar";
 import Report from "../REPORT/Report";
 
 import Carlist from "../CARLIST/Carlist";
+import ExpenseUser from "../EXPENSE/ExpenseUser";
+import ExpenseReport from "../EXPENSE/ExpenseReport";
 
 import ScrollToTop from "../ScrollTop/ScrollToTop";
 
@@ -75,6 +77,19 @@ function Home() {
               <>
                 <section id="expense">
                   <ScrollToTop />
+                  <ExpenseUser />
+                </section>
+              </>
+            }
+          />
+
+          <Route
+            path="/expenseReport"
+            element={
+              <>
+                <section id="expense">
+                  <ScrollToTop />
+                  <ExpenseReport />
                 </section>
               </>
             }

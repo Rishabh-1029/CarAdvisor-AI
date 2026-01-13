@@ -31,9 +31,9 @@ function Ourservices() {
             <br />
             Predict, plan, prosper with our tool.
           </p>
-          <a href="#hero" className="btn">
+          <button className="btn" onClick={() => navigate("/expense")}>
             Explore
-          </a>
+          </button>
         </div>
 
         <div className="box">

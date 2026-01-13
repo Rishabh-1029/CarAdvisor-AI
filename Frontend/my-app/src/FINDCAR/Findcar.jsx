@@ -46,7 +46,7 @@ function Findcar() {
       });
 
       const result = await res.json();
-      console.log("API Response:", result);
+      console.log("API process-car-data Response:", result);
 
       if (result && result.cars) {
         console.log("Navigating with data:", result.cars);
@@ -192,6 +192,7 @@ function Findcar() {
             </select>
           </div>
 
+          {/* Submit */}
           <button type="submit" className="submit-btn">
             View Cars
           </button>
