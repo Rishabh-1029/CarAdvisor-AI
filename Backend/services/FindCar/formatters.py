@@ -1,15 +1,19 @@
 def get_fuel_type(row):
-    if row["fuel_petrol"] == 1:
-        return "Petrol"
-    if row["fuel_diesel"] == 1:
-        return "Diesel"
-    if row["fuel_cng"] == 1:
-        return "CNG"
-    if row["fuel_ev"] == 1:
-        return "Electric"
-    if row["fuel_hybrid"] == 1:
-        return "Hybrid"
-    return "Unknown"
+    fuels = []
+
+    if row["fuel_petrol"]:
+        fuels.append("Petrol")
+    if row["fuel_diesel"]:
+        fuels.append("Diesel")
+    if row["fuel_cng"]:
+        fuels.append("CNG")
+    if row["fuel_ev"]:
+        fuels.append("Electric")
+    if row["fuel_hybrid"]:
+        fuels.append("Hybrid")
+
+    return fuels
+
 
 
 def get_transmission(row):
