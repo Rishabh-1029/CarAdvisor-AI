@@ -1,6 +1,14 @@
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { MdAutoAwesome } from "react-icons/md";
+import {
+  MdAutoAwesome,
+  MdDirectionsCar,
+  MdEventSeat,
+  MdOutlineSettings,
+  MdLocalGasStation,
+  MdSpeed,
+  MdSecurity,
+} from "react-icons/md";
 
 import "./Report.css";
 import Ailoading from "../AILOADING/Ailoading.jsx";
@@ -12,10 +20,21 @@ function Report() {
   const reportData = location.state?.reportData;
   const formData = location.state?.formData || {};
   const [loading, setLoading] = useState(true);
+  const [selectedCar, setSelectedCar] = useState(null);
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 2800);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedCar ? "hidden" : "auto";
+  }, [selectedCar]);
+
+  useEffect(() => {
+    const esc = (e) => e.key === "Escape" && setSelectedCar(null);
+    window.addEventListener("keydown", esc);
+    return () => window.removeEventListener("keydown", esc);
   }, []);
 
   const usageMap = {
@@ -23,6 +42,12 @@ function Report() {
     Mid: "Daily Commute",
     High: "High Mileage",
   };
+
+  const transmissionList = selectedCar
+    ? selectedCar.transmission === "Manual / Automatic"
+      ? ["Manual", "Automatic"]
+      : [selectedCar.transmission]
+    : [];
 
   const usage = usageMap[formData.usage] || "Any";
 
@@ -147,12 +172,10 @@ function Report() {
         {/* RIGHT – CAR GRID */}
         <div className="car-grid-ml">
           {cars.map((car, index) => (
-            <a
+            <div
               key={car.id ?? index}
-              href={car.link}
-              target="_blank"
-              rel="noreferrer"
               className="car-card-ml"
+              onClick={() => setSelectedCar(car)}
             >
               {car.accuracy && (
                 <span className="acc-badge-ml">{car.accuracy}</span>
@@ -204,10 +227,167 @@ function Report() {
                   <div className="car-cta-ml">View Details</div>
                 </div>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
+
+      {selectedCar && (
+        <div className="car-modal-overlay" onClick={() => setSelectedCar(null)}>
+          <div className="car-modal-card" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="car-modal-close"
+              onClick={() => setSelectedCar(null)}
+            >
+              ✕
+            </button>
+
+            <img
+              src={selectedCar.img}
+              alt={selectedCar.car_name}
+              className="car-modal-image"
+            />
+
+            <div className="car-modal-header">
+              <div>
+                <h2>{selectedCar.car_name}</h2>
+                <p className="car-modal-price">{selectedCar.price}</p>
+
+                {selectedCar.accuracy && (
+                  <span className="acc-badge-ml-detailcard">
+                    {selectedCar.accuracy}
+                  </span>
+                )}
+
+                {selectedCar.model_year && (
+                  <span className="year-badge-ml-detailcard">
+                    {selectedCar.model_year}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="car-modal-body">
+              <div className="spec-grid">
+                <span>
+                  <MdDirectionsCar />
+                  {selectedCar.body_type}
+                </span>
+
+                <span>
+                  <MdEventSeat />
+                  {selectedCar.seating} Seater
+                </span>
+
+                <span>
+                  <MdLocalGasStation />
+                  {selectedCar.fuel}
+                </span>
+
+                <span>
+                  <MdSpeed />
+                  {selectedCar.mileage}
+                  {selectedCar.fuel === "Electric" ? " Km Range" : " Km/L"}
+                </span>
+
+                {transmissionList.map((type) => (
+                  <span key={type}>
+                    <MdOutlineSettings />
+                    {type}
+                  </span>
+                ))}
+
+                <span
+                  className={
+                    selectedCar.adas === "1"
+                      ? "adas-yes-ml-detail-card"
+                      : "adas-no-ml-detail-card"
+                  }
+                >
+                  <MdSecurity />
+                  {selectedCar.adas === "1" ? "ADAS" : "No ADAS"}
+                </span>
+              </div>
+
+              <div className="ai-reasoning">
+                <p>{selectedCar.description}</p>
+              </div>
+
+              <div className="usage-suitability">
+                <h4>Usage Suitability</h4>
+
+                <div className="usage-list">
+                  <div
+                    className={`usage-item ${
+                      selectedCar.accuracy_label ? "yes" : "no"
+                    }`}
+                  >
+                    <span>{selectedCar.accuracy_label}</span>
+                    <strong>{selectedCar.accuracy_label ? "✔" : "✖"}</strong>
+                  </div>
+                  <div
+                    className={`usage-item ${
+                      selectedCar.city_use ? "yes" : "no"
+                    }`}
+                  >
+                    <span>City Use</span>
+                    <strong>{selectedCar.city_use ? "✔" : "✖"}</strong>
+                  </div>
+
+                  <div
+                    className={`usage-item ${
+                      selectedCar.highway_use ? "yes" : "no"
+                    }`}
+                  >
+                    <span>Highway Use</span>
+                    <strong>{selectedCar.highway_use ? "✔" : "✖"}</strong>
+                  </div>
+
+                  <div
+                    className={`usage-item ${
+                      selectedCar.commercial === 1 ? "yes" : "no"
+                    }`}
+                  >
+                    <span>Commercial Use</span>
+                    <strong>{selectedCar.commercial === 1 ? "✔" : "✖"}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`usage-summary ${selectedCar.accuracy_label}`}>
+                <MdAutoAwesome size={12} color="var(--accent)" />
+                <strong> {selectedCar.accuracy_label}</strong> — Based on your
+                requirements, this car aligns well with your{" "}
+                <strong>{usage.toLowerCase()}</strong> needs. It is best suited
+                for {selectedCar.city_use && "city driving"}
+                {selectedCar.city_use &&
+                  selectedCar.highway_use &&
+                  " as well as "}
+                {selectedCar.highway_use && "highway use"}.
+                <span className="accuracy-hint">
+                  AI confidence: {selectedCar.accuracy}
+                </span>
+              </div>
+            </div>
+
+            <div className="car-modal-actions">
+              <a
+                href={selectedCar.link}
+                target="_blank"
+                rel="noreferrer"
+                className="car-cta-ml"
+              >
+                Explore More
+              </a>
+            </div>
+
+            <span className="disc-warning">
+              *Details are AI-assisted and should be verified on the official
+              website.
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
