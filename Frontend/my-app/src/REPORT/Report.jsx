@@ -49,6 +49,14 @@ function Report() {
       : [selectedCar.transmission]
     : [];
 
+  const fuelList = selectedCar
+    ? Array.isArray(selectedCar.fuel)
+      ? selectedCar.fuel
+      : selectedCar.fuels
+        ? [selectedCar.fuels]
+        : []
+    : [];
+
   const usage = usageMap[formData.usage] || "Any";
 
   if (loading) {
@@ -212,8 +220,7 @@ function Report() {
                     {car.mileage}
                     {car.fuel === "Electric" ? " Km Range " : " Km/L "}
                     {"  •  "}
-                    {car.fuel}
-
+                    {car.fuel.join(" • ")}
                     {car.adas && (
                       <span
                         className={`spec-item-adas-ml ${
@@ -279,10 +286,12 @@ function Report() {
                   {selectedCar.seating} Seater
                 </span>
 
-                <span>
-                  <MdLocalGasStation />
-                  {selectedCar.fuel}
-                </span>
+                {fuelList.map((fuels) => (
+                  <span key={fuels}>
+                    <MdLocalGasStation />
+                    {fuels}
+                  </span>
+                ))}
 
                 <span>
                   <MdSpeed />
