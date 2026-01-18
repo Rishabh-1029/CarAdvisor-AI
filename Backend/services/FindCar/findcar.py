@@ -3,7 +3,7 @@ import numpy as np
 from services.FindCar.vector_store import df, vectors
 from services.FindCar.filters import apply_hard_filters
 from services.FindCar.user_vector import build_user_vector
-from services.FindCar.formatters import get_fuel_type, get_transmission, format_price
+from services.FindCar.formatters import get_fuel_type, get_transmission, format_price, get_usage_match, get_accuracy_label
 
 def findcar(user):
     filtered_df = apply_hard_filters(df, user)
@@ -41,10 +41,16 @@ def findcar(user):
             "body_type": row["car_body_type"],
             "transmission": get_transmission(row),
             "accuracy": f"{similarity:.2f}%",
+            "accuracy_label": get_accuracy_label(similarity),
+            "city_use": bool(row["city_use"]),
+            "highway_use": bool(row["highway_use"]),
+            "commercial_use": bool(row["commercial"]),
             "link": row["web_link"],
             "img": row["img"],
             "description": row["description"],
             "adas": str(row["adas"]),
+            "model_year" : row["model_year"],
+
         })
 
         if len(results) == 20:

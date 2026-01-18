@@ -26,3 +26,20 @@ def format_price(min_price, max_price):
     if min_price == max_price:
         return f"₹{int(min_price):,}"
     return f"₹{int(min_price):,} - ₹{int(max_price):,}"
+
+def get_usage_match(row, user_usage):
+    if user_usage == "Low":
+        return bool(row["usage_low"])
+    if user_usage == "Mid":
+        return bool(row["usage_medium"])
+    if user_usage == "High":
+        return bool(row["usage_high"])
+    return False
+
+def get_accuracy_label(similarity):
+    if similarity >= 0.80:
+        return "Strong Match"
+    elif similarity >= 0.60:
+        return "Good Match"
+    return "Partial Match"
+
