@@ -41,9 +41,9 @@ def get_usage_match(row, user_usage):
     return False
 
 def get_accuracy_label(similarity):
-    if similarity >= 0.80:
+    if similarity >= 75:
         return "Strong Match"
-    elif similarity >= 0.60:
+    elif similarity >= 60:
         return "Good Match"
     return "Partial Match"
 
