@@ -296,7 +296,10 @@
   color: #050505;
 }
 
-/* Car card detail */
+/* ===============================
+   Detail Focus Card Section
+=============================== */
+
 /* Overlay */
 .car-modal-overlay {
   position: fixed;
@@ -677,3 +680,114 @@
 .usage-summary:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
+
+/* ===============================
+   Fuel Expense Forecast Section
+=============================== */
+
+.Cost-grid {
+  margin-top: 28px;
+}
+
+.Maintenance-cost-3year,
+.fuel-cost-3year {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
+  border-radius: 20px;
+  padding: 24px 26px;
+  border: 1px solid var(--accent-light);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+}
+.Maintenance-cost-3year {
+  margin-top: 2rem;
+}
+
+/* Title */
+.fuel-cost-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #111;
+}
+
+.fuel-cost-title svg {
+  color: var(--accent);
+}
+
+/* Each Fuel Block */
+.fuel-cost-table {
+  background: #f7f8fa;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border: 1px solid var(--accent-light);
+}
+
+/* Header Row */
+.maintain-cost-table-head,
+.fuel-cost-table-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--accent-light);
+}
+
+/* Cost Rows */
+.maintain-cost-row,
+.fuel-cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.maintain-cost-table-head {
+  display: grid;
+  grid-template-columns: 130px 1fr 1fr 0.5fr;
+}
+.maintain-cost-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 0.75fr 0.35fr;
+}
+
+.fuel-cost-row strong {
+  font-weight: 600;
+}
+
+/* Total Highlight */
+.fuel-cost-row.total {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--accent-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.fuel-cost-table:hover {
+  background: #f4f6f9;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .fuel-cost-3year {
+    padding: 20px;
+  }
+
+  .fuel-cost-table-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* PDF */
