@@ -24,6 +24,19 @@ function Ourservices() {
         </div>
 
         <div className="box">
+          <i className="fa-solid fa-robot"></i>
+          <h3>AI Car Recommendations</h3>
+          <p>
+            Find the Perfect Car based on your prefrences.
+            <br />
+            Smart insights, Clear decisions!
+          </p>
+          <button className="btn" onClick={() => navigate("/findcar")}>
+            Explore
+          </button>
+        </div>
+
+        <div className="box">
           <i className="fa-solid fa-gas-pump"></i>
           <h3>Expense Forecasting</h3>
           <p>
@@ -34,19 +47,6 @@ function Ourservices() {
           <button className="btn" onClick={() => navigate("/expense")}>
             Explore
           </button>
-        </div>
-
-        <div className="box">
-          <i className="fa-solid fa-headset"></i>
-          <h3>User Support</h3>
-          <p>
-            Support that's always there when you need it.
-            <br />
-            We've got your back.
-          </p>
-          <a href="#contact" className="btn">
-            Explore
-          </a>
         </div>
       </div>
     </section>
