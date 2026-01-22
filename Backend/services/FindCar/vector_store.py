@@ -15,9 +15,6 @@ df.columns = df.columns.str.strip().str.lower()
 # Remove accidental index columns
 df = df.loc[:, ~df.columns.astype(str).str.contains("^unnamed", case=False)]
 
-
-print("COLUMNS:", df.columns.tolist())
-
 REQUIRED_COLUMNS = [
     "transmission_manual", "transmission_automatic",
     "fuel_diesel", "fuel_petrol", "fuel_cng", "fuel_ev", "fuel_hybrid",

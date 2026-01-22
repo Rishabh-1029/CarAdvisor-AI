@@ -27,9 +27,13 @@ def get_transmission(row):
 
 
 def format_price(min_price, max_price):
+    price = []
     if min_price == max_price:
-        return f"₹{int(min_price):,}"
-    return f"₹{int(min_price):,} - ₹{int(max_price):,}"
+        price.append(int(min_price))
+    else:
+        price.append(int(min_price))
+        price.append(int(max_price))
+    return price
 
 def get_usage_match(row, user_usage):
     if user_usage == "Low":

@@ -5,9 +5,10 @@ from services.FindCar.filters import apply_hard_filters
 from services.FindCar.user_vector import build_user_vector
 from services.FindCar.formatters import get_fuel_type, get_transmission, format_price, get_usage_match, get_accuracy_label
 
-from services.Expense.fuelcost import calculate_fuel_cost_by_year
-from services.Expense.maintaincecost import calculate_maintaince_cost_forecast
-from services.Expense.insurancecost import calculate_insurance_cost_forecast
+from services.Expense.Aiforecast.fuelcost import calculate_fuel_cost_by_year
+from services.Expense.Aiforecast.maintaincecost import calculate_maintaince_cost_forecast
+from services.Expense.Aiforecast.insurancecost import calculate_insurance_cost_forecast
+from services.Expense.Aiforecast.onroad import calculate_onroad_charges
 
 
 def findcar(user):
@@ -57,7 +58,8 @@ def findcar(user):
             "model_year" : row["model_year"],
             "fuel_cost_forcast": calculate_fuel_cost_by_year(row, user["usage"]),
             "maintaince_cost_forecast": calculate_maintaince_cost_forecast(row, user["usage"]),
-            "insurance_cost_forecast": calculate_insurance_cost_forecast(row["min_price"], row["max_price"])
+            "insurance_cost_forecast": calculate_insurance_cost_forecast(row["min_price"], row["max_price"]),
+            "onroad_charges": calculate_onroad_charges(row["min_price"], row["max_price"], get_fuel_type(row), user["city"])
         })
 
         if len(results) == 20:
