@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from services.FindCar.findcar import findcar
 from services.CarList.carlisting import carlisting
-from services.Expense.expenseuser import expenseuser
+from services.Expense.expenseuser import BASE_FUEL_PRICE, forecast_next_12_months
 
 from typing import List
 
@@ -47,10 +47,9 @@ class fuel_cost(BaseModel):
     year: str
     cost: str
 
-class ExpenseUser(BaseModel):
+class FuelRequest(BaseModel):
     city: str
     fuelType: str
-    years: str
 
 class ExpenseUserResponse(BaseModel):
     status: str
@@ -77,10 +76,30 @@ async def car_listing():
     }
 
 # Fuel Expense user by City
-@app.post("/expense-user")
-async def process_expense_user_data(data: ExpenseUser):
-    # Convert to dict
-    expense_user_data = data.dict()
-    fuel_cost = expenseuser(expense_user_data)
+@app.post("/fuel-cost")
+def get_fuel_cost(data: FuelRequest):
 
-    return {"status": "success", "count": len(fuel_cost), "fuel_cost": fuel_cost}
+    city = data.city
+    fuel_type = data.fuelType.lower()
+
+    if city not in BASE_FUEL_PRICE:
+        return {"error": "City not supported"}
+
+    if fuel_type not in BASE_FUEL_PRICE[city]:
+        return {"error": "Fuel type not supported"}
+
+    current_cost = BASE_FUEL_PRICE[city][fuel_type]
+
+    forecast_data = forecast_next_12_months(current_cost)
+
+    return {
+        "city": city,
+        "fuel_type": fuel_type,
+        "fuel_cost": {
+            "current_price": current_cost,
+            "currency": "INR",
+            "unit": "₹/L" if fuel_type != "ev" else "₹/kWh",
+            "forecast": forecast_data["forecast"],
+            "summary": forecast_data["summary"],
+        }
+    }
