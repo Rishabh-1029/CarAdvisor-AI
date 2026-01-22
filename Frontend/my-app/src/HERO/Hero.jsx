@@ -46,7 +46,7 @@ function Hero() {
           <i className="fa-solid fa-map-location-dot"></i>
           <div className="content">
             <h3>04+</h3>
-            <p>branches</p>
+            <p>Cities</p>
           </div>
         </div>
 

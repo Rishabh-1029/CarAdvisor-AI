@@ -69,14 +69,14 @@ function Footer() {
               (window.location.href = "mailto:rspsurana@gmail.com")
             }
           >
-            <i className="fa-solid fa-envelope"></i>info@TrueDrive.co.in
+            <i className="fa-solid fa-envelope"></i>rspsurana@gmail.com
           </button>
 
           <button
             onClick={() =>
               window.open(
                 "https://www.linkedin.com/in/rishabh-surana-718582253/",
-                "_blank"
+                "_blank",
               )
             }
           >
