@@ -1,37 +1,39 @@
 import pandas as pd
+from db import engine
+from sqlalchemy import text
 
-df = pd.read_excel(
-    "/Users/rishabhsurana/Desktop/Rishabh/CarGo.com/CarAdvisor-AI/Backend/car_data.xlsx",
-    header=0
-)
+# brew services start postgresql@15
+# psql truedrive
 
-df.columns = df.columns.str.strip().str.lower()
-df = df.loc[:, ~df.columns.astype(str).str.contains("^unnamed", case=False)]
+def fetch_cars_from_db():
+    query = text("SELECT * FROM cars")
+    with engine.connect() as conn:
+        result = conn.execute(query)
+        return [dict(row._mapping) for row in result]
+
 
 def carlisting():
-    """
-    Returns a clean list of cars for catalog browsing
-    """
     cars = []
+    rows = fetch_cars_from_db()
 
-    for _, row in df.iterrows():
+    for row in rows:
         fuel_types = []
-        if row["fuel_petrol"] == 1:
+        if row["fuel_petrol"]:
             fuel_types.append("Petrol")
-        if row["fuel_diesel"] == 1:
+        if row["fuel_diesel"]:
             fuel_types.append("Diesel")
-        if row["fuel_cng"] == 1:
+        if row["fuel_cng"]:
             fuel_types.append("CNG")
-        if row["fuel_ev"] == 1:
+        if row["fuel_ev"]:
             fuel_types.append("EV")
-        if row["fuel_hybrid"] == 1:
+        if row["fuel_hybrid"]:
             fuel_types.append("Hybrid")
         
-        if row["transmission_manual"] == 1 and row["transmission_automatic"] == 1:
+        if row["transmission_manual"] and row["transmission_automatic"]:
             transmission = "Manual / Automatic"
-        elif row["transmission_manual"] == 1:
+        elif row["transmission_manual"]:
             transmission = "Manual"
-        elif row["transmission_automatic"] == 1:
+        elif row["transmission_automatic"]:
             transmission = "Automatic"
         else:
             transmission = "Unknown"
