@@ -30,6 +30,8 @@ def calculate_onroad_charges(min_price, max_price, fuel_types, city):
 
     state = STATE_MAP.get(city, "Delhi")
 
+    min_tcs = (0.01) * min_price if (min_price >= 1000000) else 0
+    max_tcs = (0.01) * max_price if (max_price >= 1000000) else 0
     results = {}
 
     for fuel in fuel_types:
@@ -37,18 +39,21 @@ def calculate_onroad_charges(min_price, max_price, fuel_types, city):
 
         def compute(price):
             road_tax = int(price * tax_rate)
+            tcs = 0 if price < 1000000 else (0.01) * price
             total = (
                 road_tax +
                 FIXED_CHARGES["registration"] +
                 FIXED_CHARGES["fastag"] +
-                FIXED_CHARGES["other_charges"]
+                FIXED_CHARGES["other_charges"] + tcs
             )
             return {
                 "road_tax": road_tax,
                 "registration": FIXED_CHARGES["registration"],
                 "fastag": FIXED_CHARGES["fastag"],
                 "other_charges": FIXED_CHARGES["other_charges"],
-                "total_extra_charges": total
+                "total_extra_charges": total,
+                "min_tcs": min_tcs,
+                "max_tcs": max_tcs
             }
 
         results[fuel] = {
