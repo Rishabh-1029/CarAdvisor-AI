@@ -294,6 +294,20 @@
   border-radius: 999px;
   background: rgba(81, 255, 125, 0.9);
   color: #050505;
+  border: 1px solid rgba(58, 216, 97, 0.9);
+}
+
+.model-badge-ml {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: var(--primary-light);
+  border: 1px solid rgba(25, 98, 181, 0.626);
 }
 
 .car-cta-no-car-btn {
@@ -472,6 +486,12 @@
   margin-bottom: 4px;
   color: var(--accent);
   font-size: 136%;
+}
+
+.ex-showroom-price-tag {
+  font-size: 9px;
+  left: 10;
+  color: var(--accent);
 }
 
 .car-modal-image {
@@ -764,6 +784,21 @@
   padding-bottom: 10px;
   margin-bottom: 12px;
   border-bottom: 1px dashed var(--accent-light);
+}
+
+.today-fuel {
+  color: var(--accent);
+  border: 1.5px solid var(--accent-light);
+  border-radius: 9px;
+  padding: 0 5px;
+}
+
+.today-rate {
+  color: #005c42;
+  border: 1px solid #13b386;
+  border-radius: 9px;
+  padding: 0 5px;
+  background-color: #c7efd5;
 }
 
 /* Cost Rows */

@@ -29,6 +29,10 @@ function Report() {
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+
+  const formattedDate = `${day}-${month}-${currentYear}`;
 
   const handleForecastClick = () => {
     setForecastLoading(true);
@@ -235,6 +239,9 @@ function Report() {
               {car.accuracy && (
                 <span className="acc-badge-ml">{car.accuracy}</span>
               )}
+              {car.model_year && (
+                <span className="model-badge-ml">{car.model_year}</span>
+              )}
 
               <div className="car-card-list-ml">
                 <div className="car-image-wrapper-ml">
@@ -346,6 +353,9 @@ function Report() {
                     {selectedCar.model_year}
                   </span>
                 )}
+                <div className="ex-showroom-price-tag">
+                  ( Ex-Showroom price )
+                </div>
               </div>
             </div>
 
@@ -482,8 +492,13 @@ function Report() {
                         <div className="fuel-cost-table" key={fuelType}>
                           <div className="fuel-cost-table-head">
                             <span>
-                              <MdLocalGasStation size={16} /> {fuelType} - Year{" "}
-                              {currentYear} – {currentYear + 2}
+                              <span className="today-fuel">{fuelType}</span>
+                              {" • "}
+                              {formattedDate}
+                              {" • "}
+                              <span className="today-rate">
+                                ₹ {cost.today_cost.toLocaleString()}
+                              </span>
                             </span>
                             <span>Estimated Cost (₹)</span>
                           </div>
@@ -717,7 +732,8 @@ function Report() {
                         <div className="fuel-cost-table" key={fuelType}>
                           <div className="fuel-cost-table-head">
                             <span className="inline-icon-text">
-                              {fuelType} • Government Charges
+                              <span className="today-fuel">{fuelType}</span> •
+                              Government Charges
                             </span>
                             <span>Amount (₹)</span>
                           </div>
@@ -752,6 +768,27 @@ function Report() {
                               ₹ {charges.min_price_band.fastag.toLocaleString()}
                             </strong>
                           </div>
+
+                          {/* tcs */}
+
+                          {(charges.min_price_band.min_tcs > 0 ||
+                            charges.max_price_band.max_tcs > 0) && (
+                            <div className="fuel-cost-row">
+                              <span>TCS</span>
+                              {charges.min_price_band.min_tcs > 0 && (
+                                <strong>
+                                  ₹ {charges.min_price_band.min_tcs} - ₹{" "}
+                                  {charges.max_price_band.max_tcs}
+                                </strong>
+                              )}
+                              {!charges.min_price_band.min_tcs > 0 &&
+                                charges.max_price_band.max_tcs > 0 && (
+                                  <strong>
+                                    ₹ {charges.max_price_band.max_tcs}
+                                  </strong>
+                                )}
+                            </div>
+                          )}
 
                           {/* Other Govt Charges */}
 
@@ -801,7 +838,8 @@ function Report() {
                           <div className="fuel-cost-table" key={fuelType}>
                             <div className="fuel-cost-table-head">
                               <span className="inline-icon-text">
-                                {fuelType} • On-Road Cost
+                                <span className="today-fuel">{fuelType}</span> •
+                                On-Road Cost
                               </span>
                               <span>Total Cost (₹)</span>
                             </div>
@@ -946,7 +984,8 @@ function Report() {
                           <div className="fuel-cost-table" key={fuelType}>
                             <div className="fuel-cost-table-head">
                               <span className="inline-icon-text">
-                                {fuelType} • Ownership Cost (3 Years)
+                                <span className="today-fuel">{fuelType}</span> •
+                                Ownership Cost (3 Years)
                               </span>
                               <span>Total Cost (₹)</span>
                             </div>
