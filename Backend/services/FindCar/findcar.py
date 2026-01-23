@@ -56,8 +56,8 @@ def findcar(user):
             "description": row["description"],
             "adas": str(row["adas"]),
             "model_year" : row["model_year"],
-            "fuel_cost_forcast": calculate_fuel_cost_by_year(row, user["usage"]),
-            "maintaince_cost_forecast": calculate_maintaince_cost_forecast(row, user["usage"]),
+            "fuel_cost_forcast": calculate_fuel_cost_by_year(row, user["usage"], user["city"]),
+            "maintaince_cost_forecast": calculate_maintaince_cost_forecast(row, user["usage"], row["car_body_type"]),
             "insurance_cost_forecast": calculate_insurance_cost_forecast(row["min_price"], row["max_price"]),
             "onroad_charges": calculate_onroad_charges(row["min_price"], row["max_price"], get_fuel_type(row), user["city"])
         })

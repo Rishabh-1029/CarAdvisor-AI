@@ -3,17 +3,24 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from services.FindCar.filters import apply_hard_filters
 
-# Load dataset
-df = pd.read_excel(
-    "/Users/rishabhsurana/Desktop/Rishabh/CarGo.com/CarAdvisor-AI/Backend/car_data.xlsx",
-    header=0
-)
+from sqlalchemy import text
+from db import engine
+
+query = text("SELECT * FROM cars")
+df = pd.read_sql(query, engine)
 
 # Normalize column names
 df.columns = df.columns.str.strip().str.lower()
 
-# Remove accidental index columns
-df = df.loc[:, ~df.columns.astype(str).str.contains("^unnamed", case=False)]
+BOOLEAN_COLUMNS = [
+    "transmission_manual", "transmission_automatic",
+    "fuel_diesel", "fuel_petrol", "fuel_cng", "fuel_ev", "fuel_hybrid",
+    "usage_low", "usage_medium", "usage_high",
+    "city_use", "highway_use"
+]
+
+df[BOOLEAN_COLUMNS] = df[BOOLEAN_COLUMNS].astype(int)
+
 
 REQUIRED_COLUMNS = [
     "transmission_manual", "transmission_automatic",
@@ -80,6 +87,8 @@ for _, row in df.iterrows():
 
 X = np.array(vectors, dtype=np.float32)
 assert X.ndim == 2 and X.shape[0] > 0
+
+print(X.shape)
 
 knn = NearestNeighbors(metric="cosine", algorithm="brute")
 knn.fit(X)
