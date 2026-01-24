@@ -1,71 +1,102 @@
-# Car Recommendation System
+# TrueDrive - Car Recommendation System
 
-Car Recommendation System is a machine learning-based web system that helps users choose the right car based on their preferences and predicts future expenses using regression models.
+The **Car Recommendation & Expense Intelligence System** is a data-driven web application designed to assist users in making informed car-buying decisions. It combines preference-based car recommendations with predictive expense analysis, delivering structured and explainable insights through a modern web interface.
+
+The system is built with scalability and performance in mind, using a React-based frontend and a FastAPI-powered backend.
 
 ---
 
 ## Features
 
-- Car Recommendation System
+### Intelligent Car Recommendation
 
-  - Takes user preferences like City, budget, fuel type, seating capacity, and Average use.
-  - Filters and recommends suitable cars from a structured dataset
+- Accepts user preferences such as **city, budget, fuel type, seating capacity, and usage pattern**
+- Applies structured filtering and similarity-based ranking on a curated car dataset
+- Returns a list of cars that best match user constraints and priorities
 
-- Fuel Price Prediction Model
+### Fuel Cost & Expense Forecasting
 
-  - Predicts fuel prices for the next 10 years using regression techniques
-  - Uses historical fuel price data and time series trends
+- Predicts long-term fuel price trends using ml models based on historic data
+- Estimates future running costs based on location, fuel type, and expected usage
+- Designed to minimize recomputation using pre-processed data
 
-- Descriptive Car Output
+### Detailed Recommendation Report
 
-  - Returns a report for user recommending best cars with key details such as Model, Price Range, Mileage, Launch Year, and more
-  - Image and link of the car included for better experience
-
-- User Input from Frontend
-  - Designed to take input from a ReactJS-based frontend
-  - Input values are passed to Python backend via FastAPI for processing.
-
----
-
-## Dataset Description
-
-- Car dataset includes columns like:
-  - `Brand`, `Model`, `Start_Price`, `Max_Price`, `Fuel_Type`, `Body_Type`, `Transmission`, `Seating_Capacity`, `Engine`, `Mileage`, `Fuel_Tank`, `Launch`, `Image_URL`, `Car_Link`, `Description`
-
----
-
-## Tech Stack
-
-- Frontend
-  - HTML
-  - CSS
-  - JavaScript
-  - ReactJS
-- Backend
-  - Python
-  - FastAPI
-  - Data handling – Pandas, NumPy
-  - ML models for filtering and prediction - Content based filtering using KNN.
+- Generates a comprehensive and structured report for each recommended car
+- Includes:
+  - Model- and variant-level details
+  - Price range with realistic on-road cost estimation
+  - Detailed expense forecasting, including:
+    - Fuel cost projections based on usage patterns
+    - Maintenance and service expenses
+    - Insurance cost estimates
+    - Total cost of ownership projection for up to 3 years
+  - Mileage, engine, and performance specifications
+  - Launch year and segment classification
+  - Car images and official manufacturer reference links
 
 ---
 
-## Input
+## Dataset Overview
 
-The system accepts the following inputs from the user:
+The system uses a structured dataset containing attributes such as:
 
-- City: Location of the user
-- Budget: Price range user wants to consider
-- Fuel Type: Petrol, Diesel, Electric, CNG.
-- Seating Capacity: Number of seats required (e.g., 4, 5, 7)
-- Average Use: Expected average usage (e.g., kilometers driven per month)
+- `Brand`, `Model`
+- `Start_Price`, `Max_Price`
+- `Fuel_Type`, `Engine`, `Mileage`
+- `Seating_Capacity`, `Body_Type`, `Transmission`
+- `Launch_Year`, `Image_URL`, `Car_Link`
+- `Description`, `Usage`
 
-## Output
-
-Based on the inputs processed by the model, the system displays:
-
-- Recommended car(s) that best match user preferences
-- Estimated future expenses related to the recommended car(s)
+> Database: PostgreSQL with file-based data support
 
 ---
 
-> Under Development - UI and Backend Revamping.
+## Technology Stack
+
+### Frontend
+
+- React
+- JavaScript
+- HTML
+- CSS
+
+### Backend
+
+- Python
+- FastAPI
+- Uvicorn
+- Pandas
+- NumPy
+- Scikit-learn
+- PostgreSQL
+
+---
+
+## User Inputs for AI Recommendations
+
+The application accepts the following inputs:
+
+- **City** – User location for regional cost estimation
+- **Budget (₹)** – Preferred price range
+- **Fuel Type** – Petrol, Diesel, Electric, CNG
+- **Seating Capacity** – Required number of seats
+- **Average Usage** – Estimated monthly driving distance
+- **Transmission Type** – Preferred transmission type
+
+---
+
+## System Output
+
+Based on the provided inputs, the system generates:
+
+- A list of recommended cars
+- A structured report for each car
+- Estimated long-term fuel and ownership expenses
+
+---
+
+## Project Status
+
+> **Active Development**  
+> UI refinement, backend optimization, database integration, and performance improvements are ongoing.
