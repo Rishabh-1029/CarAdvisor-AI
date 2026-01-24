@@ -715,6 +715,10 @@
   opacity: 0.75;
 }
 
+.accuracy-hint-usage {
+  color: var(--accent);
+}
+
 .disc-warning {
   display: block;
   margin-top: 28px;

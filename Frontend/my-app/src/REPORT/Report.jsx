@@ -533,6 +533,21 @@ function Report() {
                         </div>
                       ),
                     )}
+                  {/* T & C */}
+
+                  <span className="accuracy-hint">
+                    Estimated fuel cost is calculated for{" "}
+                    <span className="accuracy-hint-usage">
+                      {formData.usage === "Low"
+                        ? "Occasional Usage (8,000 km/year)"
+                        : formData.usage === "Mid"
+                          ? "Daily Commute (12,000 km/year)"
+                          : "Long-distance Travel (18,000 km/year)"}{" "}
+                    </span>
+                    based on standard historical usage data. Actual costs may
+                    vary depending on individual driving patterns and fuel
+                    prices.
+                  </span>
                 </div>
 
                 {/* Maintance Cost */}
@@ -1067,7 +1082,7 @@ function Report() {
                             </div>
 
                             <div className="fuel-cost-row total">
-                              <span>Total On-Road Cost (3 Years)</span>
+                              <span>Total Cost of Ownership (3 Years)</span>
                               {selectedCar.price.length === 1 ? (
                                 <strong>
                                   ₹{" "}
