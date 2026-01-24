@@ -290,6 +290,9 @@ function Report() {
                     )}
                   </div>
                   <div className="car-cta-ml">View Details</div>
+                  <p className="ex-showroom-star-comment-ml">
+                    *Ex-Showroom Price
+                  </p>
                 </div>
               </div>
             </div>

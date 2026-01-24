@@ -144,13 +144,13 @@ function Carlist() {
                   {car.adas === 1 && <span className="adas-badge">ADAS</span>}
                 </p>
 
-                <p className="price">
+                <div className="price">
                   ₹{car.min_price.toLocaleString()} – ₹
                   {car.max_price.toLocaleString()}
                   <div className="ex-showroom-star-comment">
                     *Ex-Showroom Price
                   </div>
-                </p>
+                </div>
 
                 <a
                   href={car.link}
