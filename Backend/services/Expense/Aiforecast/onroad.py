@@ -2,25 +2,64 @@ def calculate_onroad_charges(min_price, max_price, fuel_types, city):
     STATE_MAP = {
         "Delhi": "Delhi",
         "Mumbai": "Maharashtra",
-        "Pune": "Maharashtra",
-        "Bengaluru": "Karnataka"
+        "Chennai": "Tamil Nadu",
+        "Bangalore": "Karnataka"
     }
 
-    ROAD_TAX = {
-        "Delhi": {
-            "Petrol": 0.10,
-            "Diesel": 0.12,
-            "CNG": 0.08,
-            "Hybrid": 0.10,
-            "Electric": 0.00
-        },
-        "Maharashtra": {
-            "Petrol": 0.11,
-            "Diesel": 0.13,
-            "CNG": 0.09,
-            "Electric": 0.01
-        }
-    }
+    def get_road_tax_rate(state, fuel_type, ex_showroom_price):
+
+        price_lakhs = ex_showroom_price / 100000.0
+
+        if state == "Delhi":
+            if fuel_type == "Electric":
+                return 0.00 
+            if price_lakhs <= 6:
+                return 0.04 if fuel_type == "Petrol" or fuel_type == "CNG" or fuel_type == "Hybrid" else 0.05
+            elif 6 < price_lakhs <= 10:
+                return 0.07 if fuel_type == "Petrol" or fuel_type == "CNG" or fuel_type == "Hybrid" else 0.0875
+            else:
+                return 0.10 if fuel_type == "Petrol" or fuel_type == "CNG" or fuel_type == "Hybrid" else 0.125
+
+        elif state == "Maharashtra":
+            if fuel_type == "Electric":
+                return 0.01 
+            if price_lakhs <= 10:
+                if fuel_type == "CNG": return 0.07
+                return 0.11 if fuel_type == "Petrol" or fuel_type == "Hybrid" else 0.13
+            elif 10 < price_lakhs <= 20:
+                if fuel_type == "CNG": return 0.08
+                return 0.12 if fuel_type == "Petrol" or fuel_type == "Hybrid" else 0.14
+            else:
+                if fuel_type == "CNG": return 0.09
+                return 0.13 if fuel_type == "Petrol" or fuel_type == "Hybrid" else 0.15
+                
+        elif state == "Tamil Nadu":
+            if fuel_type == "Electric":
+                return 0.00 
+            if price_lakhs <= 5:
+                return 0.12
+            elif 5 < price_lakhs <= 10:
+                return 0.13
+            elif 10 < price_lakhs <= 20:
+                return 0.18
+            else:
+                return 0.20
+
+        elif state == "Karnataka":
+            if fuel_type == "Electric":
+                return 0.00
+            if price_lakhs <= 5:
+                return 0.13
+            elif 5 < price_lakhs <= 10:
+                return 0.14
+            elif 10 < price_lakhs <= 20:
+                return 0.17
+            else:
+                return 0.18
+
+        return 0.0
+
+
 
     FIXED_CHARGES = {
         "registration": 1500,
@@ -35,9 +74,8 @@ def calculate_onroad_charges(min_price, max_price, fuel_types, city):
     results = {}
 
     for fuel in fuel_types:
-        tax_rate = ROAD_TAX.get(state, {}).get(fuel, 0.10)
-
         def compute(price):
+            tax_rate = get_road_tax_rate(state, fuel, price)
             road_tax = int(price * tax_rate)
             tcs = 0 if price < 1000000 else (0.01) * price
             total = (
