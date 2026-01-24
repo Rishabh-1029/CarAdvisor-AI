@@ -1,4 +1,0 @@
-City: Delhi
-Number of Seats Required: 8
-Average Use (in KM): 100
-Fuel Type: EV
