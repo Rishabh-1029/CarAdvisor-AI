@@ -38,11 +38,11 @@ function Ourservices() {
 
         <div className="box">
           <i className="fa-solid fa-gas-pump"></i>
-          <h3>Expense Forecasting</h3>
+          <h3>Fuel Price Forecasting</h3>
           <p>
-            Forecast your car expenses effortlessly.
+            Forecast fuel prices effortlessly.
             <br />
-            Predict, plan, prosper with our tool.
+            Predict and plan with our tool!
           </p>
           <button className="btn" onClick={() => navigate("/expense")}>
             Explore

@@ -55,6 +55,13 @@
   font-weight: 600;
 }
 
+.curr-price-fuel-forecast {
+  color: #3cea7c;
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
 /* Summary Card */
 .expense-summary-card {
   margin: 24px 0;

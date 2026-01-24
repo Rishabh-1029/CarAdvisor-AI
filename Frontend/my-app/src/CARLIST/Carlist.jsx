@@ -147,6 +147,9 @@ function Carlist() {
                 <p className="price">
                   ₹{car.min_price.toLocaleString()} – ₹
                   {car.max_price.toLocaleString()}
+                  <div className="ex-showroom-star-comment">
+                    *Ex-Showroom Price
+                  </div>
                 </p>
 
                 <a

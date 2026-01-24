@@ -20,6 +20,13 @@ function ExpenseReport() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+
+  const formattedDate = `${day}-${month}-${currentYear}`;
+
   const expenseReport = location.state?.expenseReport;
   const formExpenseData = location.state?.formExpenseData || {};
 
@@ -67,14 +74,13 @@ function ExpenseReport() {
           <strong>{formExpenseData.fuelType}</strong>
         </div>
         <div>
-          <span>Current Price</span>
-          <strong>₹ {currentPrice}</strong>
+          <span>Current Price ({formattedDate})</span>
+          <p className="curr-price-fuel-forecast">₹ {currentPrice}</p>
         </div>
       </div>
 
       <div className="expense-summary-card">
         <h2>Projected Annual Change</h2>
-
         <div>
           <div className="curr-price-summary">
             <h4>Current Price : </h4>
