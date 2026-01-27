@@ -154,7 +154,9 @@ function Carlist() {
                     ? `${car.milage} km range`
                     : `${car.milage} km/l`}
 
-                  {car.adas === 1 && <span className="adas-badge">ADAS</span>}
+                  {car.adas === true && (
+                    <span className="adas-badge">ADAS</span>
+                  )}
                 </p>
 
                 <div className="price">

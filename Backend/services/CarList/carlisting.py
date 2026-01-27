@@ -38,8 +38,6 @@ def carlisting():
         else:
             transmission = "Unknown"
 
-        
-
         cars.append({
             "car_id": row["car_id"],
             "car_brand": row["car_brand"],
