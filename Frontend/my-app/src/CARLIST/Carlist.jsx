@@ -7,6 +7,7 @@ function Carlist() {
   const [error, setError] = useState(null);
 
   const [bodyType, setBodyType] = useState("All");
+  const [brand, setBrand] = useState("All");
   const [fuelType, setFuelType] = useState("All");
   const [transmissionType, setTransmissionType] = useState("All");
   const [minPrice, setMinPrice] = useState(400000);
@@ -31,6 +32,7 @@ function Carlist() {
   const filteredCars = cars.filter((car) => {
     if (bodyType !== "All" && car.body_type !== bodyType) return false;
     if (fuelType !== "All" && !car.fuel_types.includes(fuelType)) return false;
+    if (brand !== "All" && car.car_brand !== brand) return false;
     if (transmissionType !== "All") {
       if (!car.transmission.includes(transmissionType)) return false;
     }
@@ -60,6 +62,17 @@ function Carlist() {
               <option value="SUV">SUV</option>
               <option value="Sedan">Sedan</option>
               <option value="Hatchback">Hatchback</option>
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <label>Brand</label>
+            <select onChange={(e) => setBrand(e.target.value)}>
+              <option value="All">All</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="Honda">Honda</option>
+              <option value="Tata">Tata</option>
+              <option value="Mahindra">Mahindra</option>
             </select>
           </div>
 

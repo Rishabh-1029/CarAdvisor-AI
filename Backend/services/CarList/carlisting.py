@@ -42,6 +42,7 @@ def carlisting():
 
         cars.append({
             "car_id": row["car_id"],
+            "car_brand": row["car_brand"],
             "car_name": f"{row['car_name']}",
             "body_type": row["car_body_type"],
             "min_price": row["min_price"],
