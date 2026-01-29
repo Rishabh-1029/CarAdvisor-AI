@@ -36,7 +36,7 @@ function Navbar() {
       <div id="login-btn">
         <a onClick={() => navigate("/findcar")} className="carAdvisior-AI-btn">
           <MdAutoAwesome size={18} />
-          CarAdvisor AI
+          AI Car Advisor
         </a>
         <button type="button" className="btn">
           Login
