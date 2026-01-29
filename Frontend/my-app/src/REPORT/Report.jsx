@@ -50,6 +50,9 @@ function Report() {
 
   useEffect(() => {
     document.body.style.overflow = selectedCar ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [selectedCar]);
 
   useEffect(() => {
@@ -1134,8 +1137,26 @@ function Report() {
 
               {/* Download PDF Button */}
               {forecast && <button className="car-cta-ml">Download PDF</button>}
+              {forecast && (
+                <button
+                  className="car-cta-ml"
+                  onClick={() =>
+                    navigate("/emi", {
+                      state: {
+                        prefillAmount: selectedCar.price[0],
+                        prefillrate: 9,
+                        prefillduration: 5,
+                        prefilldownPay: 20,
+                      },
+                    })
+                  }
+                >
+                  EMI Breakdown
+                </button>
+              )}
 
               {/* Explore Car Button */}
+
               <a
                 href={selectedCar.link}
                 target="_blank"
