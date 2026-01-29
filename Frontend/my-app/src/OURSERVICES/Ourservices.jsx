@@ -1,5 +1,6 @@
 import "./Ourservices.css";
 import { useNavigate } from "react-router-dom";
+import { MdAutoAwesome } from "react-icons/md";
 
 function Ourservices() {
   const navigate = useNavigate();
@@ -24,10 +25,11 @@ function Ourservices() {
         </div>
 
         <div className="box">
-          <i className="fa-solid fa-robot"></i>
-          <h3>AI Car Recommendations</h3>
+          <i className="fa-solid fa-wand-magic-sparkles"></i>
+
+          <h3>AI Car Advisor</h3>
           <p>
-            Find the Perfect Car based on your prefrences.
+            Find your Perfect Drive.
             <br />
             Smart insights, Clear decisions!
           </p>
@@ -40,11 +42,24 @@ function Ourservices() {
           <i className="fa-solid fa-gas-pump"></i>
           <h3>Fuel Price Forecasting</h3>
           <p>
-            Forecast fuel prices effortlessly.
+            Forecast fuel prices.
             <br />
             Predict and plan with our tool!
           </p>
           <button className="btn" onClick={() => navigate("/expense")}>
+            Explore
+          </button>
+        </div>
+
+        <div className="box">
+          <i className="fa-solid fa-calculator"></i>
+          <h3>EMI Calculator</h3>
+          <p>
+            Smart EMI planning.
+            <br />
+            Plan. Calculate. Drive!
+          </p>
+          <button className="btn" onClick={() => navigate("/emi")}>
             Explore
           </button>
         </div>
