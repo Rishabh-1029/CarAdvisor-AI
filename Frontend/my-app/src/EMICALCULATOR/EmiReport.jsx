@@ -200,9 +200,9 @@ function EmiReport() {
         {/* Balance Trend Graph */}
         <div className="emi-graph">
           <div className="emi-graph-header">
-            <h2>Outstanding Loan Trend</h2>
+            <h2>Remaining Loan Balance Over Time</h2>
             <span className="graph-subtitle">
-              Balance reduction over loan tenure
+              Outstanding loan amount across the tenure
             </span>
           </div>
 
@@ -238,7 +238,21 @@ function EmiReport() {
                 type="monotone"
                 dataKey="balance"
                 className="graph-line"
-                dot={false}
+                dot={({ cx, cy, payload }) =>
+                  payload.type === "current" ? (
+                    <circle cx={cx} cy={cy} r={4} fill="var(--primary-light)" />
+                  ) : (
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r={3}
+                      opacity={0.6}
+                      stroke="white"
+                      strokeWidth={1}
+                      fill="var(--primary-light)"
+                    />
+                  )
+                }
               />
             </LineChart>
           </ResponsiveContainer>
