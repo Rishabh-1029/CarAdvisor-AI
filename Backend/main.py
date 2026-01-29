@@ -5,6 +5,9 @@ from services.FindCar.findcar import findcar
 from services.CarList.carlisting import carlisting
 from services.Expense.expenseuser import BASE_FUEL_PRICE, forecast_next_12_months
 
+from services.Emi.emi import generate_emi_report
+
+
 from typing import List
 
 app = FastAPI()
@@ -51,6 +54,14 @@ class FuelRequest(BaseModel):
     city: str
     fuelType: str
 
+class EmiRequest(BaseModel):
+    loan_amount: float
+    rate: float                 
+    duration: int
+    downPay: float          
+    include_yearly: bool = True
+
+
 class ExpenseUserResponse(BaseModel):
     status: str
     count: int
@@ -75,10 +86,39 @@ async def car_listing():
         "cars": cars
     }
 
+@app.post("/emi")
+async def emi(data: EmiRequest):
+
+    principal_amount = data.loan_amount - (data.loan_amount * (data.downPay/100))
+
+    if principal_amount <= 0:
+        return {
+            "status": "error",
+            "message": "Down payment must be less than loan amount"
+        }
+
+    report = generate_emi_report(
+        loan_amount=principal_amount,
+        annual_interest_rate=data.rate,
+        tenure_years=data.duration,
+        include_yearly=data.include_yearly
+    )
+
+    # Add metadata for frontend
+    report["original_price"] = data.loan_amount
+    report["down_payment"] = data.loan_amount * (data.downPay/100)
+    report["principal"] = principal_amount
+    report["down_payment_percent"] = data.downPay
+
+    return {
+        "status": "success",
+        "emi_report": report
+    }
+
+
 # Fuel Expense user by City
 @app.post("/fuel-cost")
-def get_fuel_cost(data: FuelRequest):
-
+async def get_fuel_cost(data: FuelRequest):
     city = data.city
     fuel_type = data.fuelType.lower()
 
