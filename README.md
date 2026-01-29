@@ -35,6 +35,22 @@ The system is built with scalability and performance in mind, using a React-base
   - Launch year and segment classification
   - Car images and official manufacturer reference links
 
+### EMI Calculation & Loan Analysis
+
+- Provides EMI estimation with two access modes:
+  - EMI calculation of selected car from the recommendation report
+  - Standalone calculator for manual input
+- Computes monthly EMI along with:
+  - Principal–Interest breakup
+  - Remaining loan balance across the loan tenure
+- Visualizes loan balance reduction over time to help users understand loan repayment structure.
+
+### Car Listing & Exploration
+
+- Displays a comprehensive list of available cars with essential specifications and pricing details.
+- Allows users to explore and narrow down options using filter-based selection
+- Enables quick discovery of cars outside the AI recommendation flow
+
 ---
 
 ## Dataset Overview
