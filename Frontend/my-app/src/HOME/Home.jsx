@@ -14,6 +14,8 @@ import Report from "../REPORT/Report";
 import Carlist from "../CARLIST/Carlist";
 import ExpenseUser from "../EXPENSE/ExpenseUser";
 import ExpenseReport from "../EXPENSE/ExpenseReport";
+import Emi from "../EMICALCULATOR/Emi";
+import EmiReport from "../EMICALCULATOR/EmiReport";
 
 import ScrollToTop from "../ScrollTop/ScrollToTop";
 
@@ -103,6 +105,32 @@ function Home() {
                 <section id="carlist">
                   <ScrollToTop />
                   <Carlist />
+                </section>
+              </>
+            }
+          />
+
+          {/* EMI */}
+
+          <Route
+            path="/emi"
+            element={
+              <>
+                <section id="emi">
+                  <ScrollToTop />
+                  <Emi />
+                </section>
+              </>
+            }
+          />
+
+          <Route
+            path="/emiReport"
+            element={
+              <>
+                <section id="emiReport">
+                  <ScrollToTop />
+                  <EmiReport />
                 </section>
               </>
             }
