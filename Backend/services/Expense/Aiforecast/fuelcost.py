@@ -6,32 +6,33 @@ def get_fuel_prices(city):
     city=city.lower()
     if city == "delhi":
         return {
-            "Petrol": 94.77,     
-            "Diesel": 87.67,
-            "CNG": 77.09,
-            "Electric": 4.50     
+            "Petrol": 94.72,     
+            "Diesel": 87.62,     
+            "CNG": 77.09,        
+            "Electric": 4.50      
         }
     if city == "mumbai":
         return {
-            "Petrol": 104.21,     
-            "Diesel": 92.15,
-            "CNG": 92.43,
-            "Electric": 18.94     
+            "Petrol": 104.21,    
+            "Diesel": 92.15,     
+            "CNG": 77.00,        
+            "Electric": 5.89      
         }
     if city == "chennai":
         return {
-            "Petrol": 100.90,     
-            "Diesel": 87.67,
-            "CNG": 92.43,
-            "Electric": 20.0     
+            "Petrol": 100.85,    
+            "Diesel": 92.38,     
+            "CNG": 91.50,        
+            "Electric": 4.50     
         }
     if city == "bangalore":
         return {
             "Petrol": 99.84,     
-            "Diesel": 85.93,
-            "CNG": 89.50,
-            "Electric": 7.51     
+            "Diesel": 90.98,     
+            "CNG": 89.50,        
+            "Electric": 4.75      
         }
+
 
 def calculate_fuel_cost_by_year(row, user_usage, city):
     annual_km = ANNUAL_KM.get(user_usage, 12000)
