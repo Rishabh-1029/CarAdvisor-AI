@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Carlist.css";
+import Ailoading from "../AILOADING/Ailoading.jsx";
 
 function Carlist() {
   const [cars, setCars] = useState([]);
@@ -41,7 +42,9 @@ function Carlist() {
     return true;
   });
 
-  if (loading) return <p className="center-text">Loading cars...</p>;
+  if (loading) {
+    return <Ailoading />;
+  }
   if (error) return <p className="error-text">{error}</p>;
 
   return (
