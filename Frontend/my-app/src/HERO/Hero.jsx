@@ -1,5 +1,5 @@
 import "./Hero.css";
-import car from "../assets/car.png";
+import car from "../assets/Car.png";
 import { useNavigate } from "react-router-dom";
 import Findcar from "../FINDCAR/Findcar";
 

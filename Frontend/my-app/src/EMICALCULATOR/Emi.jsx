@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import "./emi.css";
+import "./Emi.css";
 
 import { MdAutoAwesome } from "react-icons/md";
 
