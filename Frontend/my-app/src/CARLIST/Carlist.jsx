@@ -14,8 +14,10 @@ function Carlist() {
   const [minPrice, setMinPrice] = useState(400000);
   const [maxPrice, setMaxPrice] = useState(5000000);
 
+  const BackendAPI = import.meta.env.VITE_BACKEND_API;
+
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/car-listing")
+    fetch(BackendAPI + "/car-listing")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch cars");
         return res.json();

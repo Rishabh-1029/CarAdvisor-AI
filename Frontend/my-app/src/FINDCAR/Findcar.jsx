@@ -1,6 +1,7 @@
 import "./Findcar.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Ailoading from "../AILOADING/Ailoading.jsx";
 
 function Findcar() {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ function Findcar() {
     transmission: "",
     transmissionFlexibility: false,
   });
+
+  const BackendAPI = import.meta.env.VITE_BACKEND_API;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,25 +40,21 @@ function Findcar() {
     e.preventDefault();
 
     try {
-      console.log("User Response:", formData);
-
-      const res = await fetch("http://localhost:8000/process-car-data", {
+      const res = await fetch(BackendAPI + "/process-car-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const result = await res.json();
-      console.log("API process-car-data Response:", result);
 
       if (result && result.cars) {
-        console.log("Navigating with data:", result.cars);
         navigate("/report", {
           state: { reportData: result, formData: formData },
         });
       }
     } catch (err) {
-      console.error("Error:", err);
+      console.error("AI Car Error:", err);
     }
   };
 

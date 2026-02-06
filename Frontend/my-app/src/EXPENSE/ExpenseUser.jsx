@@ -11,6 +11,8 @@ function ExpenseUser() {
     fuelType: "",
   });
 
+  const BackendAPI = import.meta.env.VITE_BACKEND_API;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormExpenseData({ ...formExpenseData, [name]: value });
@@ -20,25 +22,21 @@ function ExpenseUser() {
     e.preventDefault();
 
     try {
-      console.log("User query for expense: ", formExpenseData);
-
-      const res = await fetch("http://localhost:8000/fuel-cost", {
+      const res = await fetch(BackendAPI + "/fuel-cost", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formExpenseData),
       });
 
       const result = await res.json();
-      console.log("API expense-user Response:", result);
 
       if (result && result.fuel_cost) {
-        console.log("Navigating with data:", result.fuel_cost);
         navigate("/expenseReport", {
           state: { expenseReport: result, formExpenseData: formExpenseData },
         });
       }
     } catch (err) {
-      console.log("Error:", err);
+      console.log("Expense Error:", err);
     }
   };
 

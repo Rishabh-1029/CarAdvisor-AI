@@ -13,6 +13,8 @@ function EmiCalculator() {
   const prefillduration = location.state?.prefillduration || "";
   const prefilldownPay = location.state?.prefilldownPay || "";
 
+  const BackendAPI = import.meta.env.VITE_BACKEND_API;
+
   const [emiFormData, setEmiFormData] = useState({
     loan_amount: prefillAmount,
     rate: prefillrate,
@@ -34,9 +36,7 @@ function EmiCalculator() {
     e.preventDefault();
 
     try {
-      console.log("User EMI request:", emiFormData);
-
-      const res = await fetch("http://localhost:8000/emi", {
+      const res = await fetch(BackendAPI + "/emi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -49,7 +49,6 @@ function EmiCalculator() {
       });
 
       const result = await res.json();
-      console.log("API EMI Response:", result);
 
       if (result && result.emi_report) {
         navigate("/emiReport", {
