@@ -1,6 +1,24 @@
-from sqlalchemy import create_engine, text
 import os
+from dotenv import load_dotenv
+from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy import create_engine
 
-DATABASE_URL = os.getenv("DATABASE_URL","postgresql://localhost/truedrive")
+load_dotenv()
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+ASYNC_DATABASE_URL = DATABASE_URL.replace(
+    "postgresql://",
+    "postgresql+psycopg://"
+)
+
+async_engine = create_async_engine(
+    ASYNC_DATABASE_URL,
+    echo=True,
+    pool_pre_ping=True
+)
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True
+)
