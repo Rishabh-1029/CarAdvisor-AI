@@ -5,7 +5,7 @@ import "./Home.css";
 import Navbar from "../NAVBAR/navbar";
 import Hero from "../HERO/Hero";
 import Footer from "../FOOTER/Footer";
-import Contact from "../CONTACT/contact";
+import Contact from "../CONTACT/Contact";
 import Ourservices from "../OURSERVICES/Ourservices";
 
 import Findcar from "../FINDCAR/Findcar";
