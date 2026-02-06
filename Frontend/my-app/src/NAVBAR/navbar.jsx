@@ -38,9 +38,9 @@ function Navbar() {
           <MdAutoAwesome size={18} />
           AI Car Advisor
         </a>
-        <button type="button" className="btn">
+        {/* <button type="button" className="btn">
           Login
-        </button>
+        </button> */}
         <i className="fa-regular fa-user"></i>
       </div>
     </header>
