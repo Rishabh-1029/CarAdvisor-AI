@@ -43,12 +43,17 @@ def calculate_fuel_cost_by_year(row, user_usage, city):
 
     for fuel in fuels:
         price = fuel_prices.get(fuel)
-        mileage = row.get("mileage")
 
-        if not price or not mileage:
-            continue
+        if fuel == "Electric":
+            cost_per_km = price / 7.42 # 1 KwH - 6 KM (Avg Indian Standard)
 
-        cost_per_km = price / mileage
+        else:
+            mileage = row.get("mileage")
+
+            if not price or not mileage:
+                continue
+
+            cost_per_km = price / mileage
 
         yearly_cost_year1 = annual_km * cost_per_km
         yearly_cost_year2 = yearly_cost_year1 + (0.06 * yearly_cost_year1)

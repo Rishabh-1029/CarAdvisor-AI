@@ -35,7 +35,7 @@ MAINTENANCE_TABLE = {
             3: {"service": 9750.00, "misc": 4950.00},
         }
     },
-    "Ev": {
+    "Electric": {
         "Hatchback": {
             1: {"service": 1150.00, "misc": 950.00},  
             2: {"service": 2950.00, "misc": 1450.00}, 
