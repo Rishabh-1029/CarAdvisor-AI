@@ -15,6 +15,7 @@ import {
 import "./Report.css";
 import Ailoading from "../AILOADING/Ailoading.jsx";
 import { useState, useEffect, useRef } from "react";
+import html2pdf from "html2pdf.js";
 
 function Report() {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ function Report() {
   const [selectedCar, setSelectedCar] = useState(null);
   const [forecast, setForecast] = useState(false);
   const [forecastLoading, setForecastLoading] = useState(false);
+
+  const reportRef = useRef();
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -41,6 +44,26 @@ function Report() {
       setForecastLoading(false);
       setForecast(true);
     }, 4000);
+  };
+
+  const handleDownloadPdf = () => {
+    const element = reportRef.current;
+    if (!element) return;
+    
+    const actionButtons = element.querySelector('.car-modal-actions');
+    if (actionButtons) actionButtons.style.display = 'none';
+
+    const opt = {
+      margin:       0.2,
+      filename:     `${selectedCar?.car_name || 'Car'}_Report.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      if (actionButtons) actionButtons.style.display = 'flex';
+    });
   };
 
   useEffect(() => {
@@ -83,13 +106,9 @@ function Report() {
 
   const usage = usageMap[formData.usage] || "Any";
 
-  // Loading Page
-
   if (loading) {
     return <Ailoading />;
   }
-
-  // No Car Found
 
   if (
     !reportData ||
@@ -313,7 +332,7 @@ function Report() {
             setForecast(false);
           }}
         >
-          <div className="car-modal-card" onClick={(e) => e.stopPropagation()}>
+          <div className="car-modal-card" ref={reportRef} onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <button
               className="car-modal-close"
@@ -1136,7 +1155,7 @@ function Report() {
               )}
 
               {/* Download PDF Button */}
-              {forecast && <button className="car-cta-ml">Download PDF</button>}
+              {forecast && <button className="car-cta-ml" onClick={handleDownloadPdf}>Download PDF</button>}
               {forecast && (
                 <button
                   className="car-cta-ml"

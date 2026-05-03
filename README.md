@@ -17,8 +17,9 @@ The system is built with scalability and performance in mind, using a React-base
 ### Fuel Cost & Expense Forecasting
 
 - Predicts long-term fuel price trends using ml models based on historic data
-- Estimates future running costs based on location, fuel type, and expected usage
-- Designed to minimize recomputation using pre-processed data
+- Integrates a live web scraper to fetch real-time daily fuel prices (Petrol, Diesel, CNG) by city, utilizing a 24-hour intelligent cache to optimize performance
+- Estimates future running costs based on location, fuel type, and expected usage, including a 6% Year-over-Year (YoY) inflation projection
+- Designed to minimize recomputation using pre-processed data and graceful static fallbacks
 
 ### Detailed Recommendation Report
 
@@ -34,6 +35,7 @@ The system is built with scalability and performance in mind, using a React-base
   - Mileage, engine, and performance specifications
   - Launch year and segment classification
   - Car images and official manufacturer reference links
+- Supports high-resolution **PDF exports** of the entire report for offline viewing and sharing
 
 ### EMI Calculation & Loan Analysis
 
@@ -76,6 +78,8 @@ The system uses a structured dataset containing attributes such as:
 - JavaScript
 - HTML
 - CSS
+- Recharts
+- html2pdf.js
 
 ### Backend
 
@@ -85,6 +89,8 @@ The system uses a structured dataset containing attributes such as:
 - Pandas
 - NumPy
 - Scikit-learn
+- BeautifulSoup4
+- Requests
 - PostgreSQL
 
 ---
