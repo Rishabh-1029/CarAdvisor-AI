@@ -52,7 +52,7 @@ function Footer() {
           </button>
 
           <button onClick={() => navigate("/expense")}>
-            <i className="fa-solid fa-arrow-right"></i> Expense Forecast
+            <i className="fa-solid fa-arrow-right"></i> Fuel Price Forecast
           </button>
         </div>
 
@@ -74,20 +74,6 @@ function Footer() {
 
           <button
             onClick={() =>
-              window.open(
-                "https://www.linkedin.com/in/rishabh-surana-718582253/",
-                "_blank",
-              )
-            }
-          >
-            <i>
-              <FaLinkedin size={16.5} />
-            </i>
-            Rishabh Surana
-          </button>
-
-          <button
-            onClick={() =>
               window.open("https://rishabh-surana.netlify.app/", "_blank")
             }
           >
@@ -100,7 +86,7 @@ function Footer() {
       </div>
 
       <div className="copyright">
-        TrueDrive.com &copy; 2025 | all rights reserved
+        TrueDrive.com &copy; 2026 | all rights reserved | Creating. Learning. Evolving.
       </div>
     </section>
   );

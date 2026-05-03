@@ -16,6 +16,7 @@ import "./Report.css";
 import Ailoading from "../AILOADING/Ailoading.jsx";
 import { useState, useEffect, useRef } from "react";
 import html2pdf from "html2pdf.js";
+import PdfReportTemplate from "./PdfReportTemplate.jsx";
 
 function Report() {
   const navigate = useNavigate();
@@ -27,9 +28,10 @@ function Report() {
   const [selectedCar, setSelectedCar] = useState(null);
   const [forecast, setForecast] = useState(false);
   const [forecastLoading, setForecastLoading] = useState(false);
-  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const reportRef = useRef();
+  const pdfRef = useRef();
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -48,30 +50,37 @@ function Report() {
   };
 
   const handleDownloadPdf = () => {
-    setIsGeneratingPdf(true);
-    
+    setIsDownloading(true);
+
     setTimeout(() => {
-      const element = reportRef.current;
+      const element = pdfRef.current;
       if (!element) {
-        setIsGeneratingPdf(false);
+        setIsDownloading(false);
         return;
       }
 
+      // Ensure all images are loaded inside the hidden component before capture
       const opt = {
-        margin:       0.2,
-        filename:     `${selectedCar?.car_name || 'Car'}_Report.pdf`,
+        margin:       0, // Margins are handled purely via CSS inside PdfReportTemplate
+        filename:     `${selectedCar?.car_name || 'Car'}_Professional_Report.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true,
+          scrollY: 0,
+          windowWidth: 794 // Force A4 width to ensure CSS maps perfectly
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
       };
 
       html2pdf().set(opt).from(element).save().then(() => {
-        setIsGeneratingPdf(false);
+        setIsDownloading(false);
       }).catch((err) => {
         console.error("PDF Generation failed", err);
-        setIsGeneratingPdf(false);
+        setIsDownloading(false);
       });
-    }, 100); // give react a moment to hide the buttons
+    }, 150);
   };
 
   useEffect(() => {
@@ -342,17 +351,16 @@ function Report() {
         >
           <div className="car-modal-card" ref={reportRef} onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
-            {!isGeneratingPdf && (
-              <button
-                className="car-modal-close"
-                onClick={() => {
-                  setSelectedCar(null);
-                  setForecast(false);
-                }}
-              >
-                ✕
-              </button>
-            )}
+            <button
+              className="car-modal-close"
+              data-html2canvas-ignore="true"
+              onClick={() => {
+                setSelectedCar(null);
+                setForecast(false);
+              }}
+            >
+              ✕
+            </button>
             {/* TrueDrive Logo */}
             <div className="cars-not-exist-ml-truedrive-logo">
               <h1>
@@ -1157,46 +1165,52 @@ function Report() {
             {/* Buttons */}
 
             {/* Expense Forecast Button */}
-            {!isGeneratingPdf && (
-              <div className="car-modal-actions">
-                {!forecast && (
-                  <button className="car-cta-ml" onClick={handleForecastClick}>
-                    Expense Forecast
-                  </button>
-                )}
+            <div className="car-modal-actions" data-html2canvas-ignore="true">
+              {!forecast && (
+                <button className="car-cta-ml" onClick={handleForecastClick}>
+                  Expense Forecast
+                </button>
+              )}
 
-                {/* Download PDF Button */}
-                {forecast && <button className="car-cta-ml" onClick={handleDownloadPdf}>Download PDF</button>}
-                {forecast && (
-                  <button
-                    className="car-cta-ml"
-                    onClick={() =>
-                      navigate("/emi", {
-                        state: {
-                          prefillAmount: selectedCar.price[0],
-                          prefillrate: 9,
-                          prefillduration: 5,
-                          prefilldownPay: 20,
-                        },
-                      })
-                    }
-                  >
-                    EMI Breakdown
-                  </button>
-                )}
-
-                {/* Explore Car Button */}
-
-                <a
-                  href={selectedCar.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="car-cta-ml"
+              {/* Download PDF Button */}
+              {forecast && (
+                <button 
+                  className="car-cta-ml" 
+                  onClick={handleDownloadPdf}
+                  disabled={isDownloading}
                 >
-                  Explore {selectedCar.car_name}
-                </a>
-              </div>
-            )}
+                  {isDownloading ? "Generating PDF..." : "Download PDF"}
+                </button>
+              )}
+              {forecast && (
+                <button
+                  className="car-cta-ml"
+                  onClick={() =>
+                    navigate("/emi", {
+                      state: {
+                        prefillAmount: selectedCar.price[0],
+                        prefillrate: 9,
+                        prefillduration: 5,
+                        prefilldownPay: 20,
+                      },
+                    })
+                  }
+                >
+                  EMI Breakdown
+                </button>
+              )}
+
+              {/* Explore Car Button */}
+
+              <a
+                href={selectedCar.link}
+                target="_blank"
+                rel="noreferrer"
+                className="car-cta-ml"
+              >
+                Explore {selectedCar.car_name}
+              </a>
+            </div>
 
             {/* Final T & C */}
 
@@ -1208,6 +1222,19 @@ function Report() {
           </div>
         </div>
       )}
+      {/* Hidden Professional PDF Template Engine */}
+      <div style={{ position: "absolute", top: "-9999px", left: "-9999px", zIndex: -1 }}>
+        <PdfReportTemplate
+          ref={pdfRef}
+          selectedCar={selectedCar}
+          formData={formData}
+          currentYear={currentYear}
+          formattedDate={formattedDate}
+          usage={usage}
+          fuelList={fuelList}
+          transmissionList={transmissionList}
+        />
+      </div>
     </div>
   );
 }

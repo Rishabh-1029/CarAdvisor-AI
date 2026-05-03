@@ -42,9 +42,9 @@ function Ourservices() {
           <i className="fa-solid fa-gas-pump"></i>
           <h3>Fuel Price Forecasting</h3>
           <p>
-            Forecast fuel prices.
+            Powered by live market rates.
             <br />
-            Predict and plan with our tool!
+            Predict your 3-year running costs!
           </p>
           <button className="btn" onClick={() => navigate("/expense")}>
             Explore

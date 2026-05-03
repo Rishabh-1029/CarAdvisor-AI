@@ -35,8 +35,12 @@ The system is built with scalability and performance in mind, using a React-base
   - Mileage, engine, and performance specifications
   - Launch year and segment classification
   - Car images and official manufacturer reference links
-- Supports high-resolution **PDF exports** of the entire report for offline viewing and sharing
-
+- Generates a **High-Fidelity Professional PDF Report (5-Pages)** optimized for A4 format, including:
+  - **Page 1: User Profile & Car Specs** — AI reasoning, usage suitability, and key specifications.
+  - **Page 2: On-Road Cost Analysis** — City-specific government charges, RTO, and exact on-road pricing.
+  - **Page 3: Financial Forecasting** — Year-by-year fuel and maintenance expense projections with inflation modeling.
+  - **Page 4: Total Cost of Ownership & EMI** — 3, 5, and 7-year loan projections with 80% financing models.
+  - **Page 5: Branding & Next Steps** — Quick action links, platform features, and professional disclosures.
 ### EMI Calculation & Loan Analysis
 
 - Provides EMI estimation with two access modes:
@@ -122,3 +126,11 @@ Based on the provided inputs, the system generates:
 
 > **Active Development**  
 > UI refinement, backend optimization, database integration, and performance improvements are ongoing.
+
+---
+
+Your feedback is valuable. Please share your thoughts and suggestions to help improve the TrueDrive.
+
+---
+
+> TrueDrive.com © 2026 | all rights reserved | Creating. Learning. Evolving.

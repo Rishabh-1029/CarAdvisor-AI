@@ -3,7 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from services.FindCar.findcar import findcar
 from services.CarList.carlisting import carlisting
-from services.Expense.expenseuser import BASE_FUEL_PRICE, forecast_next_12_months
+from services.Expense.expenseuser import forecast_next_12_months
+from services.Expense.Aiforecast.fuelcost import get_fuel_prices
 
 from services.Emi.emi import generate_emi_report
 
@@ -122,13 +123,16 @@ async def get_fuel_cost(data: FuelRequest):
     city = data.city
     fuel_type = data.fuelType.lower()
 
-    if city not in BASE_FUEL_PRICE:
-        return {"error": "City not supported"}
+    # Map fuel_type from frontend to scraper keys
+    fuel_mapping = {"petrol": "Petrol", "diesel": "Diesel", "ev": "Electric", "cng": "CNG"}
+    target_fuel = fuel_mapping.get(fuel_type)
 
-    if fuel_type not in BASE_FUEL_PRICE[city]:
-        return {"error": "Fuel type not supported"}
+    live_prices = get_fuel_prices(city)
+    
+    if not live_prices or target_fuel not in live_prices:
+        return {"error": "City or fuel type not supported"}
 
-    current_cost = BASE_FUEL_PRICE[city][fuel_type]
+    current_cost = live_prices[target_fuel]
 
     forecast_data = forecast_next_12_months(current_cost)
 
