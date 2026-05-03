@@ -27,6 +27,7 @@ function Report() {
   const [selectedCar, setSelectedCar] = useState(null);
   const [forecast, setForecast] = useState(false);
   const [forecastLoading, setForecastLoading] = useState(false);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   const reportRef = useRef();
 
@@ -47,23 +48,30 @@ function Report() {
   };
 
   const handleDownloadPdf = () => {
-    const element = reportRef.current;
-    if (!element) return;
+    setIsGeneratingPdf(true);
     
-    const actionButtons = element.querySelector('.car-modal-actions');
-    if (actionButtons) actionButtons.style.display = 'none';
+    setTimeout(() => {
+      const element = reportRef.current;
+      if (!element) {
+        setIsGeneratingPdf(false);
+        return;
+      }
 
-    const opt = {
-      margin:       0.2,
-      filename:     `${selectedCar?.car_name || 'Car'}_Report.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+      const opt = {
+        margin:       0.2,
+        filename:     `${selectedCar?.car_name || 'Car'}_Report.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
 
-    html2pdf().set(opt).from(element).save().then(() => {
-      if (actionButtons) actionButtons.style.display = 'flex';
-    });
+      html2pdf().set(opt).from(element).save().then(() => {
+        setIsGeneratingPdf(false);
+      }).catch((err) => {
+        console.error("PDF Generation failed", err);
+        setIsGeneratingPdf(false);
+      });
+    }, 100); // give react a moment to hide the buttons
   };
 
   useEffect(() => {
@@ -334,15 +342,17 @@ function Report() {
         >
           <div className="car-modal-card" ref={reportRef} onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
-            <button
-              className="car-modal-close"
-              onClick={() => {
-                setSelectedCar(null);
-                setForecast(false);
-              }}
-            >
-              ✕
-            </button>
+            {!isGeneratingPdf && (
+              <button
+                className="car-modal-close"
+                onClick={() => {
+                  setSelectedCar(null);
+                  setForecast(false);
+                }}
+              >
+                ✕
+              </button>
+            )}
             {/* TrueDrive Logo */}
             <div className="cars-not-exist-ml-truedrive-logo">
               <h1>
@@ -1147,44 +1157,46 @@ function Report() {
             {/* Buttons */}
 
             {/* Expense Forecast Button */}
-            <div className="car-modal-actions">
-              {!forecast && (
-                <button className="car-cta-ml" onClick={handleForecastClick}>
-                  Expense Forecast
-                </button>
-              )}
+            {!isGeneratingPdf && (
+              <div className="car-modal-actions">
+                {!forecast && (
+                  <button className="car-cta-ml" onClick={handleForecastClick}>
+                    Expense Forecast
+                  </button>
+                )}
 
-              {/* Download PDF Button */}
-              {forecast && <button className="car-cta-ml" onClick={handleDownloadPdf}>Download PDF</button>}
-              {forecast && (
-                <button
+                {/* Download PDF Button */}
+                {forecast && <button className="car-cta-ml" onClick={handleDownloadPdf}>Download PDF</button>}
+                {forecast && (
+                  <button
+                    className="car-cta-ml"
+                    onClick={() =>
+                      navigate("/emi", {
+                        state: {
+                          prefillAmount: selectedCar.price[0],
+                          prefillrate: 9,
+                          prefillduration: 5,
+                          prefilldownPay: 20,
+                        },
+                      })
+                    }
+                  >
+                    EMI Breakdown
+                  </button>
+                )}
+
+                {/* Explore Car Button */}
+
+                <a
+                  href={selectedCar.link}
+                  target="_blank"
+                  rel="noreferrer"
                   className="car-cta-ml"
-                  onClick={() =>
-                    navigate("/emi", {
-                      state: {
-                        prefillAmount: selectedCar.price[0],
-                        prefillrate: 9,
-                        prefillduration: 5,
-                        prefilldownPay: 20,
-                      },
-                    })
-                  }
                 >
-                  EMI Breakdown
-                </button>
-              )}
-
-              {/* Explore Car Button */}
-
-              <a
-                href={selectedCar.link}
-                target="_blank"
-                rel="noreferrer"
-                className="car-cta-ml"
-              >
-                Explore {selectedCar.car_name}
-              </a>
-            </div>
+                  Explore {selectedCar.car_name}
+                </a>
+              </div>
+            )}
 
             {/* Final T & C */}
 
