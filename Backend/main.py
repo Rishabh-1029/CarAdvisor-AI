@@ -68,6 +68,11 @@ class ExpenseUserResponse(BaseModel):
     count: int
     fuel_cost: List[fuel_cost]
 
+# Health check — used by frontend to warm up the server on load
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 # Car Recommendation
 @app.post("/process-car-data")
 async def process_car_data(data: CarRequest):
