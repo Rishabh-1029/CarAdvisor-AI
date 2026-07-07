@@ -293,7 +293,7 @@ const PdfReportTemplate = forwardRef(
                 <strong style={{ color: "#0b1e33" }}>Next steps:</strong> Use the quick actions below to explore the official {selectedCar.car_name} page, compare other cars, or calculate a custom EMI plan. Whether you're buying your first car or upgrading, TrueDrive is here to make every rupee count.
               </p>
               <p style={{ fontSize: "11px", color: "#475569", lineHeight: "1.7", marginBottom: "14px" }}>
-                <strong style={{ color: "#0b1e33" }}>Important Note:</strong> The prices, specifications, and features listed in this report are based on the latest available market data as of {{CURRENT_DATE}}. However, on-road prices can vary significantly depending on your exact location, dealer-specific offers, insurance provider charges, and final configuration choices. Always verify the final figures with the official manufacturer website and your local dealership before making a purchase decision.
+                <strong style={{ color: "#0b1e33" }}>Important Note:</strong> The prices, specifications, and features listed in this report are based on the latest available market data as of {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}. However, on-road prices can vary significantly depending on your exact location, dealer-specific offers, insurance provider charges, and final configuration choices. Always verify the final figures with the official manufacturer website and your local dealership before making a purchase decision.
               </p>
               
               <h3 className="pdf-section-title">Quick Actions</h3>
