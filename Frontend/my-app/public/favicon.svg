@@ -1,24 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Shadow -->
-  <ellipse cx="32" cy="50" rx="22" ry="3" fill="#000" opacity="0.15"/>
+  <!-- Background: dark navy rounded square -->
+  <rect width="64" height="64" rx="14" ry="14" fill="#0b1e33"/>
 
-  <!-- Car body -->
-  <path
-    d="M10 36c0-4 3-7 7-7h4l6-7c1-1 2-2 4-2h8c2 0 3 1 4 2l6 7h4c4 0 7 3 7 7v6H10v-6z"
-    fill="#1976d2"
-  />
+  <!-- Subtle inner glow ring -->
+  <rect width="64" height="64" rx="14" ry="14" fill="none" stroke="#3ac6ff" stroke-width="1.5" opacity="0.25"/>
 
-  <!-- Window -->
-  <path
-    d="M24 23h16c1 0 2 .4 2 1.2L38 29H26l-4-4.8c0-.8 1-1.2 2-1.2z"
-    fill="#bbdefb"
-  />
+  <!-- "T" letter -->
+  <text
+    x="9"
+    y="46"
+    font-family="Arial, Helvetica, sans-serif"
+    font-weight="800"
+    font-size="34"
+    fill="white"
+    letter-spacing="-1"
+  >T</text>
 
-  <!-- Wheels -->
-  <circle cx="20" cy="44" r="5" fill="#263238"/>
-  <circle cx="44" cy="44" r="5" fill="#263238"/>
+  <!-- "D" letter in brand cyan -->
+  <text
+    x="32"
+    y="46"
+    font-family="Arial, Helvetica, sans-serif"
+    font-weight="800"
+    font-size="34"
+    fill="#3ac6ff"
+    letter-spacing="-1"
+  >D</text>
 
-  <!-- Wheel highlight -->
-  <circle cx="20" cy="44" r="2" fill="#90caf9"/>
-  <circle cx="44" cy="44" r="2" fill="#90caf9"/>
+  <!-- Accent underline -->
+  <rect x="9" y="50" width="46" height="2.5" rx="1.25" fill="#3ac6ff" opacity="0.7"/>
 </svg>
